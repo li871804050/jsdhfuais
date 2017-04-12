@@ -1,0 +1,524 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/administrator/ontologies/2017/2/untitled-ontology-5"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://www.semanticweb.org/administrator/ontologies/2017/2/untitled-ontology-5">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#中医科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#中药"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#五官科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#介入医学科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#传染病科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#儿科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#内科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医学影像科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医技科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医药"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#外科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#妇产科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#男科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#疾病"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#皮肤性病科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#精神心理科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#肿瘤科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#药品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#营养科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#西药"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#骨科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#麻醉医学科"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#功能主治"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#并发症"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#报案"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#涉案物品"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#禁忌"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#药物相互作用"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#人属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#传染性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#作案手段"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#剂型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#发病部位"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#商品名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#地址"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#姓名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#年龄"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#性别"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#性状"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#成份"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#手机号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#批准文号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#时间"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#案件属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#注意事项"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品价值"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品品牌"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品类型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#用法用量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#疾病名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#疾病属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相关症状"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#编号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#药品属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#身份证"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#通用名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#部位"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#中医科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#中药"/>
+        <Class IRI="#药品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#五官科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#介入医学科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#传染病科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#儿科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#内科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#医学影像科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#医技科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#外科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#妇产科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#男科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <Class IRI="#医药"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#并发症"/>
+            <Class IRI="#疾病"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#传染性"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#发病部位"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#疾病名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#疾病"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#相关症状"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#皮肤性病科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#精神心理科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#肿瘤科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <Class IRI="#医药"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#功能主治"/>
+            <Class IRI="#疾病"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#禁忌"/>
+            <Class IRI="#疾病"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#药物相互作用"/>
+            <Class IRI="#药品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#企业名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#剂型"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#商品名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#性状"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#成份"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#批准文号"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#注意事项"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#用法用量"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#通用名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#营养科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#西药"/>
+        <Class IRI="#药品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#骨科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#麻醉医学科"/>
+        <Class IRI="#疾病"/>
+    </SubClassOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#药物相互作用"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#企业名称"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#传染性"/>
+        <DataProperty IRI="#疾病属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#作案手段"/>
+        <DataProperty IRI="#案件属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#剂型"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#发病部位"/>
+        <DataProperty IRI="#疾病属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#商品名称"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#地址"/>
+        <DataProperty IRI="#案件属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#姓名"/>
+        <DataProperty IRI="#人属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#年龄"/>
+        <DataProperty IRI="#人属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#性别"/>
+        <DataProperty IRI="#人属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#性状"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#成份"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#手机号"/>
+        <DataProperty IRI="#人属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#批准文号"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#时间"/>
+        <DataProperty IRI="#案件属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#注意事项"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#物品价值"/>
+        <DataProperty IRI="#物品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#物品名"/>
+        <DataProperty IRI="#物品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#物品品牌"/>
+        <DataProperty IRI="#物品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#物品类型"/>
+        <DataProperty IRI="#物品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#用法用量"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#疾病名称"/>
+        <DataProperty IRI="#疾病属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#相关症状"/>
+        <DataProperty IRI="#疾病属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#编号"/>
+        <DataProperty IRI="#案件属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#身份证"/>
+        <DataProperty IRI="#人属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#通用名称"/>
+        <DataProperty IRI="#药品属性"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#部位"/>
+        <DataProperty IRI="#案件属性"/>
+    </SubDataPropertyOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
