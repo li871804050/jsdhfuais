@@ -56,7 +56,6 @@ public class searchData {
 	public String getClichedMessage(String dataStr) {
 		System.out.println("搜索!");
 		JSONObject paramJSON = JSON.parseObject(dataStr);
-		System.err.println("搜索!");
 		System.out.println(paramJSON.toString());
 		//搜索结果
 		List<Object> result = creatIndexFromNeo4j.search(paramJSON.get("casetype").toString());
@@ -149,7 +148,7 @@ public class searchData {
 		//在这里把结果加入到JSON
 		JSONObject json = new JSONObject();
 		if (result.size() == 3) {
-			System.out.println(result.get(0));
+//			System.out.println(result.get(0));
 			json.put("left", result.get(0));
 			Map<String, String> map1 = (Map<String, String>) result.get(1);
 			Map<String, String> map2 = (Map<String, String>) result.get(2);

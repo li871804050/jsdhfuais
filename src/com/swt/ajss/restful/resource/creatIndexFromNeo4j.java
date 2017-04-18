@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,51 +17,40 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
+import org.apache.lucene.util.QueryBuilder;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hankcs.lucene.HanLPAnalyzer;
 import com.swt.ajss.restful.service.StartService;
 
 
 public class creatIndexFromNeo4j {
 	public static String indexPath = StartService.dicDir + "/index2";
 	public static void main(String[] args) {
-//		Neo4jConnection StartService.connection = new Neo4jConnection("192.168.0.140", "7474", "neo4j", "123456");
-//		System.out.println(StartService.connection.exectCypher1("MATCH (n:Store0044) where n.SkuName = '暧之星毛绒珠光热水袋（大号）' RETURN n"));
-//		creatIndex();
-//		List<String> reStrings = search("D:\\index", "热水袋");
-//		for (String r: reStrings){
-//			System.err.println(r);
+
+		creatIndex(indexPath, 1);
+//		List<String> reStrings = searchIndex(indexPath, "维生素B");
+//		for (int i = 0; i < reStrings.size(); i++){
+//			System.out.println(reStrings.get(i));
 //		}
-//		List<Object> result = search("成 自行车");
-//		for (List<String> rs: result){
-//			for (String r: rs){
-//				System.err.println(r);
-//			}
-//		}
-//		String cypher = "MATCH (n)-[r:rule]->(m) RETURN r,m,n LIMIT 2";
-//		System.out.println(StartService.connection.exectCypher1(cypher));
 	}
 	
 	/* 需要读入实体属性关系文件
 	*  输入索引所在路径
 	*  关系的属性名统一为type
 	*/
-	public static void creatIndex(String dicDir){
+	public static void creatIndex(String dicDir, int anl){
 		StartService.set();
 //		List<String> list = addLable.read();
 //		StartService.connection = new Neo4jConnection(list.get(0), list.get(1), list.get(2), list.get(3));
@@ -71,9 +62,15 @@ public class creatIndexFromNeo4j {
 					f.delete();
 				}
 			}
-			Directory directory = FSDirectory.open(file);
-			StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
-			IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);			 
+			Path path = Paths.get(dicDir + "/index2");
+			Directory directory = FSDirectory.open(path);
+			Analyzer analyzer = null;
+			if (anl == 1){
+				analyzer = new HanLPAnalyzer();
+			}else {
+				analyzer = new StandardAnalyzer();
+			}
+			IndexWriterConfig config = new IndexWriterConfig(analyzer);			 
 			IndexWriter writer = new IndexWriter(directory, config);
 						
 //			String[] labels = {"ClassID1", "ClassID1Name", "ClassID2", "ClassID2Name", "ClassID3", "ClassID3Name", "ClassID", "ClassID4Name", "conf", "label", "lift", "Price_Com", "Price_Must" ,"rulePR", "sku", "SkuName", "Standards", "sup", "Time_Def", "Unit_Sale"};
@@ -93,9 +90,9 @@ public class creatIndexFromNeo4j {
 				 * 属性名为y
 				 * */
 				Document documnet = new Document();
-				Field field1 = new Field("实体名", "实体", Field.Store.YES, Field.Index.NOT_ANALYZED);
-				Field field2 = new Field("属性值", key, Field.Store.YES, Field.Index.ANALYZED);
-				Field field3 = new Field("属性名", key, Field.Store.YES, Field.Index.NOT_ANALYZED);
+				Field field1 = new TextField("实体名", "实体", Field.Store.YES);
+				Field field2 = new TextField("属性值", key, Field.Store.YES);
+				Field field3 = new TextField("属性名", key, Field.Store.YES);
 				documnet.add(field1);
 				documnet.add(field2);
 				documnet.add(field3);
@@ -115,11 +112,11 @@ public class creatIndexFromNeo4j {
 					 * 属性值为n.x
 					 * 属性名为x
 					 * */
-						pro = pro.replace("\\", "^*");
+						pro = pro.replace("\\", ".+");
 						documnet = new Document();
-						field1 = new Field("实体名", key, Field.Store.YES, Field.Index.NOT_ANALYZED);
-						field2 = new Field("属性值", pro, Field.Store.YES, Field.Index.ANALYZED);
-						field3 = new Field("属性名", label, Field.Store.YES, Field.Index.NOT_ANALYZED);
+						field1 = new TextField("实体名", key, Field.Store.YES);
+						field2 = new TextField("属性值", pro, Field.Store.YES);
+						field3 = new TextField("属性名", label, Field.Store.YES);
 						documnet.add(field1);
 						documnet.add(field2);
 						documnet.add(field3);
@@ -139,22 +136,51 @@ public class creatIndexFromNeo4j {
 			List<String> reList = readRel();
 			for (String rel: reList){
 				String[] relDatas = rel.split("-");
-				String result = "";
-				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
-				result = StartService.connection.exectCypher1(cypher);
-				List<String> allPro = getArrayResult(result);										
-				
-				for (String pro: allPro){ 
-					Document documnet = new Document();
-					Field field1 = new Field("实体名", relDatas[0]+ "%" + relDatas[1], Field.Store.YES, Field.Index.NOT_ANALYZED);
-					Field field2 = new Field("属性值", pro, Field.Store.YES, Field.Index.ANALYZED);
-					Field field3 = new Field("属性名", relDatas[2], Field.Store.YES, Field.Index.NOT_ANALYZED);
-					documnet.add(field1);
-					documnet.add(field2);
-					documnet.add(field3);
-					writer.addDocument(documnet);
-				}
+				Field field1 = new TextField("实体名", relDatas[0]+ "%%%" + relDatas[1], Field.Store.YES);
+				Field field2 = new TextField("属性值", relDatas[2], Field.Store.YES);
+				Field field3 = new TextField("属性名", relDatas[2], Field.Store.YES);
+//				String result = "";
+//				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
+//				result = StartService.connection.exectCypher1(cypher);
+//				List<String> allPro = getArrayResult(result);										
+//				
+//				for (String pro: allPro){ 
+				Document documnet = new Document();
+//					Field field1 = new TextField("实体名", relDatas[0]+ "%%%" + relDatas[1], Field.Store.YES);
+//					Field field2 = new TextField("属性值", pro, Field.Store.YES);
+//					Field field3 = new TextField("属性名", relDatas[2], Field.Store.YES);
+				documnet.add(field1);
+				documnet.add(field2);
+				documnet.add(field3);
+				writer.addDocument(documnet);
+//				}
 			}
+			
+			Set<String> levelSet = readLevel2();
+			for (String rel: levelSet){
+				Field field1 = new TextField("实体名", "实体", Field.Store.YES);
+				Field field2 = new TextField("属性值", rel, Field.Store.YES);
+				Field field3 = new TextField("属性名", rel, Field.Store.YES);
+//				String result = "";
+//				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
+//				result = StartService.connection.exectCypher1(cypher);
+//				List<String> allPro = getArrayResult(result);										
+//				
+//				for (String pro: allPro){ 
+				Document documnet = new Document();
+//					Field field1 = new TextField("实体名", relDatas[0]+ "%%%" + relDatas[1], Field.Store.YES);
+//					Field field2 = new TextField("属性值", pro, Field.Store.YES);
+//					Field field3 = new TextField("属性名", relDatas[2], Field.Store.YES);
+				documnet.add(field1);
+				documnet.add(field2);
+				documnet.add(field3);
+				writer.addDocument(documnet);
+//				}
+			}
+			
+			
+			
+			
 			writer.close();
 			directory.close();
 		}catch (IOException e) {
@@ -190,25 +216,21 @@ public class creatIndexFromNeo4j {
 			return result;
 		}
         try {
-            Directory dir = FSDirectory.open(new File(indexDir));
-            IndexReader reader = IndexReader.open(dir);
+        	Path path = Paths.get(indexDir);
+            Directory dir = FSDirectory.open(path);
+            IndexReader reader = DirectoryReader.open(dir);
             IndexSearcher searcher = new IndexSearcher(reader);
-            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
-            QueryParser queryParser = new QueryParser(Version.LUCENE_36, "属性值", analyzer);
-            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
-            Query query = queryParser.parse(keyWord);
-            TopScoreDocCollector res = TopScoreDocCollector.create(100, false);
-            searcher.search(query, res);
-            
-            int rowCount = res.getTotalHits();
-            TopDocs tds = res.topDocs(0, 100);
-            ScoreDoc[] sd = tds.scoreDocs;  
-
+            Analyzer analyzer = new HanLPAnalyzer();
+            QueryBuilder builder = new QueryBuilder(analyzer);
+//            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
+            Query query = builder.createPhraseQuery("属性值", keyWord);
+            ScoreDoc[] sd = searcher.search(query, 1000).scoreDocs;
+          
             for (int i = 0; i < sd.length; i++) {
                 Document hitDoc = reader.document(sd[i].doc);
                 String en = hitDoc.get("实体名");
                 String pN = hitDoc.get("属性名");
-                String pR = hitDoc.get("属性值").replace("^*", "\\\\");
+                String pR = hitDoc.get("属性值");
                 result.add(en + "######" + pN + "######" + pR);
             }
 
@@ -479,6 +501,30 @@ public class creatIndexFromNeo4j {
 					pList.add(pro);
 				}
 				map.put(word[0], pList);
+			}
+			reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return map;
+	}
+    
+    
+    public static Set<String> readLevel2() {
+    	Set<String> map = new HashSet<>();
+    	try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(StartService.dicDir + "/level.txt")));
+			String line = "";
+			while ((line = reader.readLine()) != null){
+				String[] word = line.split(":");
+				String[] pros = word[1].split("\t");
+				for (String pro: pros){
+					map.add(pro);
+				}
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {

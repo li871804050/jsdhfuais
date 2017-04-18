@@ -19,7 +19,7 @@ public class search {
 	public static String indexPath = StartService.dicDir + "/index2";
 	public static String levelPath = StartService.dicDir + "/level.txt";
 	public static void main(String[] args) {
-		getResult("维生素B12 维生素K1注射液");
+		getResult("陈永兴 诊断 疾病");
 //		String match = "match (n1:案件) where (n1.地址 = '*金鹤园小区85栋\\401室家//里*号**' ) return n1";
 //		System.out.println(StartService.neo4jHandle.getCypherResult(match));
 	}
@@ -51,11 +51,16 @@ public class search {
     	listMap.add(m);
     	m = new HashMap<>();
     	listMap.add(m);
-    	
+    	List<String> idStrings = new ArrayList<>();
     	for (String res: resData){
-    		countEnt(listMap, res);
+    		countEnt(listMap, res, idStrings);
     	}
-    	
+    	if (idStrings.size() > 0){
+	    	String resIds = useIDs(idStrings);
+	    	if (!"".equals(resIds)){
+	    		resData.add(resIds);
+	    	}
+    	}
     	Map<String, String> map = listMap.get(1);
     	List<String> keys = new ArrayList<>(map.keySet());
     	for (String key: keys){
@@ -166,64 +171,189 @@ public class search {
 		List<String> data = new ArrayList<>();
 		List<String> ent = new ArrayList<>();
 		Map<String, Integer> cyMatches = new HashMap<>();
+		List<String> cyWheres = new ArrayList<>();
 		String cyWhere = "";
-		for (String key: res.keySet()){
-			String[] words = key.split("####");
-			if ("实体".equals(words[0]) && !ent.contains(words[1])){
-//				ent.add(words[1]);
+		List<String> relationShip = new ArrayList<>();
+		List<String> resKey = new ArrayList<>(res.keySet());
+		for (int i = 0; i < res.size(); i ++){
+			String[] words = resKey.get(i).split("####");
+			if ("实体".equals(words[0])){
+				if (!ent.contains(words[1])){
+					ent.add(words[1]);
+				}
 				continue;
-			}else if (words[0].contains("%")) {
+			}else if (words[0].contains("%%%")) {
+				relationShip.add(words[0].split("%%%")[0]);
+				relationShip.add(words[0].split("%%%")[1]);
+				relationShip.add(words[1]);
 				continue;
 			}else if (!ent.contains(words[0])){
 				ent.add(words[0]);
 			}
-			
-			int c = cyMatches.size() + 1;
-			cyMatches.put(words[0], c);
+			if (!cyMatches.containsKey(words[0])){
+				int c = cyMatches.size() + 1;
+				cyMatches.put(words[0], c);
+			}
 			if (!"".equals(cyWhere)){
 				cyWhere = cyWhere.substring(0, cyWhere.length() - 3) + ") and (";
 			}else {
 				cyWhere = "(";
 			}
-			List<String> resKey = new ArrayList<>(res.keySet());
-			for (int i = 0; i < res.size(); i ++){
-				for (int j = 0; j < res.get(resKey.get(i)).size(); j++){
-					for (int k = 0; k < res.get(resKey.get(i)).get(j).size(); k++){
-						cyWhere = cyWhere + "n" + cyMatches.get(words[0]) + "." + words[1]  + " = '" + res.get(resKey.get(i)).get(j).get(k) + "' or ";
-					}
-					if (j == res.get(resKey.get(i)).size() - 1){
-						cyWhere = cyWhere.substring(0, cyWhere.length() - 3) + ") and (";
+			
+			for (int j = 0; j < res.get(resKey.get(i)).size(); j++){
+				String cy = "(";
+				for (int k = 0; k < res.get(resKey.get(i)).get(j).size(); k++){
+					if (res.get(resKey.get(i)).get(j).get(k).contains(".+")){
+						cy = cy + "n" + cyMatches.get(words[0]) + "." + words[1]  + " =~ '" + res.get(resKey.get(i)).get(j).get(k) + "' or ";
+						cyWhere = cyWhere + "n" + cyMatches.get(words[0]) + "." + words[1]  + " =~ '" + res.get(resKey.get(i)).get(j).get(k) + "' or ";
 					}else {
-						cyWhere = cyWhere.substring(0, cyWhere.length() - 3) + ") and (";
-					}
+						cy = cy + "n" + cyMatches.get(words[0]) + "." + words[1]  + " = '" + res.get(resKey.get(i)).get(j).get(k) + "' or ";
+						cyWhere = cyWhere + "n" + cyMatches.get(words[0]) + "." + words[1]  + " = '" + res.get(resKey.get(i)).get(j).get(k) + "' or ";
+					}	
 				}
-				
+				cyWheres.add(cy.substring(0, cy.length() - 3));
 			}
-//			System.out.println(cyWhere + ")");
+			
+				
 		}
-		if (ent.size() > 1){
-			List<String> paths = graphRel.getPathR(ent);
-			for (String path: paths){
-				String cypher = "";
-				for (String key: cyMatches.keySet()){
-					path = path.replace(":"+ key, "n" + cyMatches.get(key) + ":" + key);
-				}
-				cypher = "match p = " + path + " where " + cyWhere.substring(0, cyWhere.length() - 7) + ") return p";
-				System.out.println(cypher);
-				String result = StartService.neo4jHandle.getCypherResult(cypher);
-				if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
-					data.add(result);
-				}
-				
+		
+		if (cyWhere.matches(".* or ")){
+			cyWhere = cyWhere.substring(0, cyWhere.length() - 3);
+		}
+		
+		if (!"".equals(cyWhere)){
+			cyWhere = "where " + cyWhere + ")";
+		}
+		
+		for (int i = 0; i < cyWheres.size(); i++){
+			if (cyWheres.get(i).matches(".* or ")){
+				String cy = cyWheres.get(i);
+				cy = cy.substring(0, cy.length() - 3);
+				cyWheres.remove(i);
+				cyWheres.add(i, cy);
 			}
-		}else {
-			String cypher = "";
-			cypher = "match (n1:" + ent.get(0) + ") where " + cyWhere.substring(0, cyWhere.length() - 7) + ") return n1";
-			String result = StartService.neo4jHandle.getCypherResult(cypher);
-			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+		}
+//			System.out.println(cyWhere + ")");
+		
+		
+		
+		if (ent.size() > 1 && relationShip.size() == 0){//处理多个实体的查询
+			
+			List<String> results = searchAll.dealMoreEnt(ent, cyMatches, cyWhere);
+			if (results.size() > 0){
+				data.addAll(results);
+			}
+//			List<String> paths = graphRel.getPathR(ent);//计算实体的路径
+//			for (String path: paths){
+//				String cypher = "";
+//				for (String key: cyMatches.keySet()){
+//					path = path.replace(":"+ key, "n" + cyMatches.get(key) + ":" + key);
+//				}
+//				cypher = "match p = " + path + " " + cyWhere + " return p";
+//				System.out.println("0:" + cypher);
+//				String result = StartService.neo4jHandle.getCypherResult(cypher);
+//				if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//					data.add(result);
+//				}
+//				
+//			}
+			
+		}else if (ent.size() == 1 && relationShip.size() == 0){//处理只有一个实体的查询
+			String result = searchAll.dealEntOne(ent, cyWhere);
+			if (!"".equals(result)){
 				data.add(result);
 			}
-			System.out.println(cypher);
+//			String cypher = "";			
+//			cypher = "match (n1:" + ent.get(0) + ") " + cyWhere + " return n1";
+//			String result = StartService.neo4jHandle.getCypherResult(cypher);
+//			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//				data.add(result);
+//			}			
+			
+			//两实体之间存在关系，需要自动添加此处需要修改
+		}else if (relationShip.size() == 3){	
+			//关系查询，只处理查询内容为一个属性一个关系或没有属性
+			if (ent.size() == 1){//处理查询内容为一个属性一个关系
+				String result = searchAll.dealRelEnt(ent, cyWhere, relationShip);
+				if (!"".equals(result)){
+					data.add(result);
+				}
+//				if (ent.get(0).equals(relationShip.get(0))){
+//					cypher = "";
+//					cypher = "match p = (n1:" + ent.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") " + cyWhere + " return p";
+//					String result = StartService.neo4jHandle.getCypherResult(cypher);
+//					if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//						data.add(result);
+//					}
+//				}else if (ent.get(0).equals(relationShip.get(1))){
+//					cypher = "";
+//					cypher = "match p = (n1:" + ent.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(0)+ ") " + cyWhere + " return p";
+//					String result = StartService.neo4jHandle.getCypherResult(cypher);
+//					if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//						data.add(result);
+//					}
+//				}else {
+//					cypher = "";
+//					cypher = "match p = (n1:" + ent.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(0)+ ") " + cyWhere + " return p";
+//					String result = StartService.neo4jHandle.getCypherResult(cypher);
+//					if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//						data.add(result);
+//					}else{
+//						cypher = "match p = (n1:" + ent.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") " + cyWhere + " return p";
+//						result = StartService.neo4jHandle.getCypherResult(cypher);
+//						if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//							data.add(result);
+//						}
+//					}
+//				}
+			}else if (ent.size() == 0){//处理查询只有关系
+				String result = searchAll.dealRelOnly(relationShip);				
+				if (!"".equals(result)){
+					data.add(result);
+				}
+//				cypher = "";
+//				cypher = "match p = (:" + relationShip.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") return p";
+//				String result = StartService.neo4jHandle.getCypherResult(cypher);
+//				if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//					data.add(result);
+//				}
+			}else if (ent.size() == 2){
+				String result = searchAll.dealRelEntTwo(relationShip, ent, cyWhere, cyMatches);
+				if (!"".equals(result)){
+					data.add(result);
+				}
+			}
+		}
+		
+		if (data.size() == 0){
+			if (ent.size() == 2 && relationShip.size() == 0){
+				String result = searchAll.getShortPathTwo(ent, cyWhere);
+				if (!"".equals(result)){
+					data.add(result);
+				}
+//				String cypher = "";
+//				cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
+//				System.out.println("3:" + cypher);
+//				String result = StartService.neo4jHandle.getCypherResult(cypher);
+//				if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//					data.add(result);
+//				}
+			}
+		}
+		
+		if (ent.size() == 1 && cyWheres.size() == 2){
+			String result = searchAll.getShortPathOne(ent, cyWheres);
+			if (!"".equals(result)){
+				data.add(result);
+			}
+//			String cypher = "";
+////			cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(0) + ")) where " + cyWheres.get(0).substring(0, cyWheres.get(0).length() - 4) + ") and "+ cyWheres.get(1).substring(0, cyWheres.get(1).length() - 4).replace("n1", "n2") + ") return p";
+//			cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(0) + ")) where " + cyWheres.get(0) + ") and "+ cyWheres.get(1).replace("n1", "n2") + ") return p";
+//			System.out.println("4:" + cypher);
+//			String result = StartService.neo4jHandle.getCypherResult(cypher);
+//			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+//				data.add(result);
+//			}
 		}
 		
 		return data;
@@ -275,7 +405,7 @@ public class search {
 	/*
 	 * 查询结果实体统计
 	 */
-	public static void countEnt(List<Map<String, String>> list, String data){		
+	public static void countEnt(List<Map<String, String>> list, String data, List<String> idStrings){		
     	JSONObject json = JSONObject.parseObject(data);
     	String dataArr =  json.getString("results");
     	Map<String, String> map = list.get(0);
@@ -291,6 +421,10 @@ public class search {
 				JSONObject object2 = jsonArray.getJSONObject(i);
 				String label = object2.get("labels").toString();
 				String id = object2.get("id").toString();
+				if (idStrings.contains(id)){
+					continue;
+				}
+				idStrings.add(id);
 				label = label.substring(2, label.length() - 2);
 	//				System.err.println("=="+label);
 				for (String all: labelAll){
@@ -315,4 +449,23 @@ public class search {
 			}
 		}
     }
+	
+	
+	/*
+	 * 获取所有点之间的关系
+	 */
+	public static String useIDs(List<String> idStrings) {
+		String nodes = "";
+		for (int i = 0; i < idStrings.size() - 1; i ++){
+			nodes = nodes + idStrings.get(i) + ",";
+		}
+		nodes = nodes + idStrings.get(idStrings.size() - 1);
+		String cypher = "Start n = node(" + nodes + "), m = node(" + nodes + ") match p = (m)-[r]-(n) return p";
+		String reString = StartService.neo4jHandle.getCypherResult(cypher);
+		if (reString.contains("\"graph\"") && reString.contains("\"nodes\"")){
+			return reString;
+		}else {
+			return "";
+		}		
+	}
 }

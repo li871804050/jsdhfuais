@@ -262,6 +262,9 @@
         <ObjectProperty IRI="#功能主治"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#包含"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#并发症"/>
     </Declaration>
     <Declaration>
@@ -278,6 +281,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#禁忌疾病"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#诊断"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#配伍禁忌"/>
@@ -587,6 +593,13 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#患者"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#诊断"/>
+            <Class IRI="#疾病"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#患者"/>
         <DataSomeValuesFrom>
             <DataProperty IRI="#出生日期"/>
             <Datatype abbreviatedIRI="xsd:anyURI"/>
@@ -824,6 +837,13 @@
         <ObjectSomeValuesFrom>
             <ObjectProperty IRI="#功能主治"/>
             <Class IRI="#疾病"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#药品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#包含"/>
+            <Class IRI="#成份"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>

@@ -24,7 +24,7 @@ public class StartService {
 
 	private int defaultPort = 9900; // 默认端口
 	public static Neo4jConnection connection = null;
-	public static Neo4jHandle neo4jHandle = null;
+	public static Neo4jHandle neo4jHandle = new Neo4jHandle("neo4j", "123456", "192.168.0.191", "7474");
 	public static String dicDir = "dic";
 	public static void main(String[] args) {
 //		dicDir = args[0];
@@ -32,10 +32,11 @@ public class StartService {
 		addLable.startLabel();
 		System.err.println("添加label完成");
 		System.err.println("本体解析");
-		owlTest.deal(dicDir + "/20170407.owl");
+//		owlTest.deal(dicDir + "/" + args[1]);
+		owlTest.deal(dicDir + "/20170417.owl");
 		System.err.println("本体解析完成");
 		System.err.println("索引创建");
-		creatIndexFromNeo4j.creatIndex(dicDir);
+		creatIndexFromNeo4j.creatIndex(dicDir, 1);
 		System.err.println("索引创建完成");
 		StartService.start();
 		

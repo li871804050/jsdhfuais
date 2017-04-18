@@ -83,7 +83,7 @@ public class Neo4jHandle {
 		for(String nodeid:key){
 			//String cypher="start n=node("+nodeid+") set n.weight=\""+pageRankResult.get(nodeid)+"\" return n";
 			String cypher="match(n) where id(n)="+nodeid+" set n.pr='"+pageRankResult.get(nodeid)+"' return n";
-			System.out.println(cypher);
+//			System.out.println(cypher);
 			exectCypher1(cypher);
 		}
 		 
@@ -96,7 +96,7 @@ public class Neo4jHandle {
 			for(String nodeid:key){
 				//String cypher="start n=node("+nodeid+") set n.weight=\""+pageRankResult.get(nodeid)+"\" return n";
 				String cypher="match(n) where id(n)="+nodeid+" set n.communitybuy1='"+communityResult.get(nodeid)+"' return n";
-				System.out.println(cypher);
+//				System.out.println(cypher);
 				exectCypher1(cypher);
 	        }
 			 
@@ -109,7 +109,7 @@ public class Neo4jHandle {
 			Node nodeItem=node.next();
 			String nodeId=(String) nodeItem.getId();
 			String cypher="match(n) where id(n)="+nodeId+" set n.communityrule1Degree='"+comDegree+"' return n";
-			System.out.println(cypher);
+//			System.out.println(cypher);
 			exectCypher1(cypher);
 		}
 		 
@@ -125,7 +125,7 @@ public class Neo4jHandle {
 	 
 	 public void insertNeo4jGoodsPR(String nodeID,double pr){
 		 String cypher="match(n) where id(n)="+nodeID+" set n.rulePR="+pr+" ";
-		 System.out.println(cypher);
+//		 System.out.println(cypher);
 	     exectCypher1(cypher);
 	 }
 	 
@@ -133,7 +133,7 @@ public class Neo4jHandle {
 	 public void insertNeo4jProperrityOfRel(int startID,int targetID,String proKey,double confidence){
 		 
 		 String cypher="start n=node("+startID+"),m=node("+targetID+") match (n)-[r:`buy`]-(m) set r."+proKey+"="+confidence+"";
-		 System.out.println(cypher);
+//		 System.out.println(cypher);
 		 exectCypher1(cypher);
 		 
 	 }
@@ -179,7 +179,7 @@ public class Neo4jHandle {
 		client.addFilter(new HTTPBasicAuthFilter(USERNAME, PASSWORD));
 		WebResource resource = client.resource(txUri);
 		String payload = "{\"query\" : \"" + cypher + "\"}";
-		System.out.println(payload);
+//		System.out.println(payload);
 		ClientResponse response = resource.accept(MediaType.APPLICATION_JSON)
 				.type(MediaType.APPLICATION_JSON_TYPE).entity(payload)
 				.post(ClientResponse.class);
