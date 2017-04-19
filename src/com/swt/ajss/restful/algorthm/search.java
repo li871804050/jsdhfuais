@@ -19,7 +19,7 @@ public class search {
 	public static String indexPath = StartService.dicDir + "/index2";
 	public static String levelPath = StartService.dicDir + "/level.txt";
 	public static void main(String[] args) {
-		getResult("陈永兴 诊断 疾病");
+		getResult("长江");
 //		String match = "match (n1:案件) where (n1.地址 = '*金鹤园小区85栋\\401室家//里*号**' ) return n1";
 //		System.out.println(StartService.neo4jHandle.getCypherResult(match));
 	}
@@ -425,10 +425,10 @@ public class search {
 					continue;
 				}
 				idStrings.add(id);
-				label = label.substring(2, label.length() - 2);
+//				label = label.substring(2, label.length() - 2);
 	//				System.err.println("=="+label);
 				for (String all: labelAll){
-					if (label.contains(all)){
+					if (label.contains("\""+ all + "\"")){
 						if (map.containsKey(all)){
 							int c = Integer.parseInt(map.get(all)) + 1;
 							map.remove(all);
