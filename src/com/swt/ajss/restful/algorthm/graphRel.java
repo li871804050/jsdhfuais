@@ -16,9 +16,9 @@ import org.eclipse.swt.layout.GridData;
 import com.swt.ajss.restful.service.StartService;
 
 public class graphRel {
-	public static String relPath = StartService.dicDir + "/rel.txt";
+	public static String relPath = StartService.dicDir + "/rel2";
 	public static void main(String[] args) {
-		String[] wString = {"物", "人"};
+		String[] wString = {"B", "A"};
 		List<String> aList = new ArrayList<>();
 		for (String w: wString){
 			aList.add(w);
@@ -159,12 +159,24 @@ public class graphRel {
 		List<Object> result = new ArrayList<>();
 		HashMap<String, List<String>> rMap = new HashMap<>();
 		HashMap<String, List<String>> entMap = new HashMap<>();
+		List<String> same = new ArrayList<>();
 		try {
 			
 			BufferedReader reader = new BufferedReader(new FileReader(relPath));
 			String line = "";
 			while ((line = reader.readLine()) != null){
 				String[] wString = line.split("-");
+//				if (wString[0].equals(wString[1])){
+//					if (same.contains(wString[0])){
+//						int count = 1;
+//						while (!same.contains(wString[0] + "-" + count)){
+//							count = count + 1;
+//						}
+//						same.add(wString[0] + "-" + count);
+//					}
+//					
+//				}
+				
 				if (rMap.containsKey(wString[0] + "-" + wString[1])){
 					rMap.get(wString[0] + "-" + wString[1]).add(wString[2]);
 				}else {

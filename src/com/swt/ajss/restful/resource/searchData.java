@@ -28,6 +28,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.gephi.graph.api.Configuration;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
@@ -45,6 +47,7 @@ import com.swt.ajss.restful.algorthm.Degree;
 import com.swt.ajss.restful.algorthm.Neo4jHandle;
 import com.swt.ajss.restful.algorthm.Result;
 import com.swt.ajss.restful.algorthm.search;
+import com.swt.ajss.restful.graph.GraphSearch;
 import com.swt.ajss.restful.service.StartService;
 
 @Path("/query")
@@ -143,8 +146,8 @@ public class searchData {
 		JSONObject paramJSON = JSON.parseObject(casetype);
 		casetype = paramJSON.getString("casetype");
 		casetype = casetype.replace("'", "");
-		List<Object> result = search.getResult(casetype);
-		
+		List<Object> result = GraphSearch.getResult(casetype);
+//		List<Object> result = search.getResult(casetype);
 		//在这里把结果加入到JSON
 		JSONObject json = new JSONObject();
 		if (result.size() == 3) {
@@ -163,6 +166,23 @@ public class searchData {
 			json.put("right", array);
 		}
 		return json.toString();
+	}
+
+	@POST
+	@Path("/map")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getMap(String casetype){
+	
+		System.out.println("搜索!");
+//		JSONObject paramJSON = JSON.parseObject(dataStr);
+//		System.err.println("搜索!");
+//		System.out.println(paramJSON.toString());
+		//搜索结果
+		JSONObject paramJSON = JSON.parseObject(casetype);
+		casetype = paramJSON.getString("casetype");
+		casetype = casetype.replace("'", "");
+		return com.swt.ajss.restful.graph.test.analyzeMap(casetype);
 	}
 
 	

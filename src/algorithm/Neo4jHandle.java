@@ -194,6 +194,10 @@ public class Neo4jHandle {
 		return returnData;
 		
 	}
+	
+	public String toString() {
+		return SERVER_ROOT_URI;
+	}
 	 
 
 }

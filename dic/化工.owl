@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/administrator/ontologies/2017/3/untitled-ontology-82"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/administrator/ontologies/2017/3/untitled-ontology-82">
+    <Prefix name="" IRI="http://www.semanticweb.org/administrator/ontologies/2017/3/untitled-ontology-82"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <DataProperty IRI="#传真"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#邮编"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#风险术语"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#生产"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#聚合物"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分子式"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#地址"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#InChI"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#联系人"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工行业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#催化剂及助剂"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#中文别名"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#石油化工"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#食品和饲料"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#英文名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#手机"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医药与生物化工"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#闪点"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工产品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#日用化工"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#存储管理"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学物品"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#公司名"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#染料及颜料"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#无机化工"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#中间体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#香精与香料"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学试剂"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学矿"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分子量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#地区"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#邮箱"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#原料"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#电话"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#英文别名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#密度"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#分公司"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#沸点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#水溶性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#有机原料"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#涂料与油漆"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物化性质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#农用化学品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#胶粘剂"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#安全术语"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#EINECS号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#中文名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#CAS号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险品标志"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#产能"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#运输管理"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#熔点"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#中间体"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#催化剂及助剂"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#农用化学品"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#原料"/>
+            <Class IRI="#化学物品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#CAS号"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#EINECS号"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#InChI"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#中文别名"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#中文名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#产能"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#分子式"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#分子量"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#危险品标志"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#安全术语"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#密度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#水溶性"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#沸点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#熔点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#物化性质"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#英文别名"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#英文名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#闪点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学物品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#风险术语"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学矿"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学试剂"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工产品"/>
+        <Class IRI="#化学物品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#分公司"/>
+            <Class IRI="#化工企业"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#生产"/>
+            <Class IRI="#化工产品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#传真"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#公司名"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#地区"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#地址"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#手机"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#电话"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#联系人"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#邮箱"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#邮编"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#医药与生物化工"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#无机化工"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#日用化工"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#有机原料"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#染料及颜料"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#涂料与油漆"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#石油化工"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#聚合物"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#胶粘剂"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#食品和饲料"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#香精与香料"/>
+        <Class IRI="#化工产品"/>
+    </SubClassOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+

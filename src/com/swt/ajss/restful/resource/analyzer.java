@@ -148,7 +148,7 @@ public class analyzer {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(StartService.dicDir + "/config.txt")));
 			String line = "";
 			while ((line = reader.readLine()) != null ) {
-				con.add(line);
+				con.add(line.split("=")[1]);
 				
 			}
 		} catch (FileNotFoundException e) {

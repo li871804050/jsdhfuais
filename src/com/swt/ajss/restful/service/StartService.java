@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.sun.grizzly.http.SelectorThread;
+import com.swt.ajss.restful.graph.OntologyAnalyzer;
 import com.swt.ajss.restful.resource.Neo4jConnection;
 import com.swt.ajss.restful.resource.addLable;
 import com.swt.ajss.restful.resource.analyzer;
@@ -24,7 +25,7 @@ public class StartService {
 
 	private int defaultPort = 9900; // 默认端口
 	public static Neo4jConnection connection = null;
-	public static Neo4jHandle neo4jHandle = new Neo4jHandle("neo4j", "123456", "192.168.0.191", "7474");
+	public static Neo4jHandle neo4jHandle = new Neo4jHandle("neo4j", "123456", "192.168.1.209", "7474");
 	public static String dicDir = "dic";
 	public static void main(String[] args) {
 //		dicDir = args[0];
@@ -33,10 +34,11 @@ public class StartService {
 		System.err.println("添加label完成");
 		System.err.println("本体解析");
 //		owlTest.deal(dicDir + "/" + args[1]);
-		owlTest.deal(dicDir + "/20170417.owl");
+		owlTest.deal(dicDir + "/化工.owl");
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/化工.owl");
 		System.err.println("本体解析完成");
 		System.err.println("索引创建");
-		creatIndexFromNeo4j.creatIndex(dicDir, 1);
+		creatIndexFromNeo4j.creatIndex(dicDir + "index2", 1);
 		System.err.println("索引创建完成");
 		StartService.start();
 		
@@ -48,7 +50,7 @@ public class StartService {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(dicDir + "/config.txt")));
 			String line = "";
 			while ((line = reader.readLine()) != null ) {
-				list.add(line);
+				list.add(line.split("=")[1]);
 				
 			}
 		} catch (FileNotFoundException e) {
