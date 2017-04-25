@@ -174,7 +174,7 @@ public class searchData {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getMap(String casetype){
 	
-		System.out.println("搜索!");
+		System.out.println("地图!");
 //		JSONObject paramJSON = JSON.parseObject(dataStr);
 //		System.err.println("搜索!");
 //		System.out.println(paramJSON.toString());
@@ -182,7 +182,7 @@ public class searchData {
 		JSONObject paramJSON = JSON.parseObject(casetype);
 		casetype = paramJSON.getString("casetype");
 		casetype = casetype.replace("'", "");
-		return com.swt.ajss.restful.graph.test.analyzeMap(casetype);
+		return com.swt.ajss.restful.graph.GraphMap.analyzeMap(casetype);
 	}
 
 	

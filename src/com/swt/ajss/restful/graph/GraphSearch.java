@@ -18,9 +18,10 @@ public class GraphSearch {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(StartService.neo4jHandle.getCypherResult("match p = (:化工产品)-[r:生产]-(:化工企业) return p"));
-		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/化工.owl");
-		getResult("生产");
+		StartService.set();
+		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
+//		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/化工.owl");
+//		getResult("生产");
 	}
 	
 	/**
@@ -59,12 +60,12 @@ public class GraphSearch {
     	for (String res: resData){
     		GraphData.countEnt(listMap, res, idStrings);
     	}
-    	if (idStrings.size() > 0){
-	    	String resIds = GraphData.useIDs(idStrings);
-	    	if (!"".equals(resIds)){
-	    		resData.add(resIds);
-	    	}
-    	}
+//    	if (idStrings.size() > 0){
+//	    	String resIds = GraphData.useIDs(idStrings);
+//	    	if (!"".equals(resIds)){
+//	    		resData.add(resIds);
+//	    	}
+//    	}
     	Map<String, String> map = listMap.get(1);
     	List<String> keys = new ArrayList<>(map.keySet());
     	for (String key: keys){

@@ -14,18 +14,26 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.FieldInvertState;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.search.CollectionStatistics;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermStatistics;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.search.similarities.Similarity;
+import org.apache.lucene.search.similarities.TFIDFSimilarity;
+import org.apache.lucene.search.similarities.Similarity.SimScorer;
+import org.apache.lucene.search.similarities.Similarity.SimWeight;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.QueryBuilder;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.hankcs.lucene.HanLPAnalyzer;
 import com.swt.ajss.restful.service.StartService;
 
@@ -46,11 +54,11 @@ public class GraphIndex {
 	public static void main(String[] args) {
 
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/化工.owl");
-		creatIndex(indexPath, 1);
-//		List<String> reStrings = searchIndex(indexPath, "维生素B");
-//		for (int i = 0; i < reStrings.size(); i++){
-//			System.out.println(reStrings.get(i));
-//		}
+//		creatIndex(indexPath, 1);
+		List<String> reStrings = searchIndex(indexPath, "子公司");
+		for (int i = 0; i < reStrings.size(); i++){
+			System.out.println(reStrings.get(i));
+		}
 	}
 	
 	
@@ -213,8 +221,7 @@ public class GraphIndex {
 	 * @param keyWord	查找的内容
 	 * @return 在索引文件中查找到的所有结果
 	 */
-    public static List<String> searchIndex(String indexDir, String keyWord) {
-    	List<String> result = new ArrayList<>();
+    public static List<String> searchIndex(String indexDir, String keyWord) {    	List<String> result = new ArrayList<>();
 		if ("".equals(keyWord) || keyWord == null){
 			return result;
 		}
@@ -222,7 +229,29 @@ public class GraphIndex {
         	Path path = Paths.get(indexDir);
             Directory dir = FSDirectory.open(path);
             IndexReader reader = DirectoryReader.open(dir);
+            Similarity similarity = new ClassicSimilarity();
+//            Similarity similarity = new Similarity() {
+//				
+//				@Override
+//				public SimScorer simScorer(SimWeight arg0, LeafReaderContext arg1) throws IOException {
+//					// TODO 自动生成的方法存根
+//					return null;
+//				}
+//				
+//				@Override
+//				public SimWeight computeWeight(CollectionStatistics arg0, TermStatistics... arg1) {
+//					// TODO 自动生成的方法存根
+//					return null;
+//				}
+//				
+//				@Override
+//				public long computeNorm(FieldInvertState arg0) {
+//					// TODO 自动生成的方法存根
+//					return 0;
+//				}
+//			};
             IndexSearcher searcher = new IndexSearcher(reader);
+            searcher.setSimilarity(similarity);
             Analyzer analyzer = new HanLPAnalyzer();
             QueryBuilder builder = new QueryBuilder(analyzer);
 //            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
@@ -230,11 +259,13 @@ public class GraphIndex {
             ScoreDoc[] sd = searcher.search(query, 1000).scoreDocs;
           
             for (int i = 0; i < sd.length; i++) {
-                Document hitDoc = reader.document(sd[i].doc);
-                String en = hitDoc.get(KEYFIELD_1);
-                String pN = hitDoc.get(KEYFIELD_2);
-                String pR = hitDoc.get(KEYFIELD_3);
-                result.add(en + LINK_1 + pN + LINK_1 + pR);
+            	if (sd[i].score > 7.0){
+	                Document hitDoc = reader.document(sd[i].doc);
+	                String en = hitDoc.get(KEYFIELD_1);
+	                String pN = hitDoc.get(KEYFIELD_2);
+	                String pR = hitDoc.get(KEYFIELD_3);
+	                result.add(en + LINK_1 + pN + LINK_1 + pR);
+            	}
             }
 
         } catch (Exception e) {
@@ -243,5 +274,4 @@ public class GraphIndex {
 
 		return result;
     }
-    
 }

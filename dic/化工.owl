@@ -124,7 +124,7 @@
         <DataProperty IRI="#密度"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#分公司"/>
+        <ObjectProperty IRI="#子公司"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#沸点"/>
@@ -346,7 +346,7 @@
     <SubClassOf>
         <Class IRI="#化工企业"/>
         <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#分公司"/>
+            <ObjectProperty IRI="#子公司"/>
             <Class IRI="#化工企业"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>

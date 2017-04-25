@@ -1,8 +1,11 @@
 package com.swt.ajss.restful.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -110,21 +113,26 @@ public class GraphData {
 	 * @param result	cypher执行结果
 	 * @return	数据对应属性值
 	 */
-	public static List<List<String>> getPros(String[] atrs, String result) {
-		List<List<String>> datas = new ArrayList<>();
+	public static List<Map<String, String>> getPros(String[] atrs, String result) {
+		Set<Map<String, String>> datas = new HashSet();
 		JSONObject object = JSONObject.parseObject(result).getJSONArray("results").getJSONObject(0);
 		JSONArray array = object.getJSONArray("data");
 		for (int i = 0; i < array.size(); i++){
-			List<String> pros = new ArrayList<>();
+			Map<String, String> pros = new HashMap();
 			JSONObject graph = array.getJSONObject(i).getJSONObject("graph");
-			JSONObject properties = graph.getJSONArray("nodes").getJSONObject(0).getJSONObject("properties");
-			for (String atr: atrs){
-				pros.add(properties.getString(atr));
+			JSONArray array2 = graph.getJSONArray("nodes");
+			for (int k = 0; k < array2.size(); k++){
+				JSONObject properties = array2.getJSONObject(k).getJSONObject("properties");
+				for (String atr: atrs){
+					if (!pros.containsKey(atr) && !"".equals(properties.getString(atr)) && null != properties.getString(atr)){
+						pros.put(atr, properties.getString(atr));
+					}
+				}
 			}
 			datas.add(pros);
 		}
 		
-		return datas;
+		return new ArrayList<>(datas);
 		
 	}
 
