@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import com.sun.grizzly.http.SelectorThread;
+import com.swt.ajss.restful.graph.GraphIndex;
 import com.swt.ajss.restful.graph.OntologyAnalyzer;
 import com.swt.ajss.restful.resource.Neo4jConnection;
 import com.swt.ajss.restful.resource.addLable;
@@ -25,21 +28,22 @@ public class StartService {
 
 	private int defaultPort = 9900; // 默认端口
 	public static Neo4jConnection connection = null;
-	public static Neo4jHandle neo4jHandle = new Neo4jHandle("neo4j", "123456", "192.168.1.209", "7474");
+	public static Neo4jHandle neo4jHandle = null;
 	public static String dicDir = "dic";
 	public static void main(String[] args) {
 //		dicDir = args[0];
 		System.err.println("添加label");
-		addLable.startLabel();
+//		addLable.startLabel();
 		System.err.println("添加label完成");
 		System.err.println("本体解析");
-//		owlTest.deal(dicDir + "/" + args[1]);
-		owlTest.deal(dicDir + "/化工.owl");
-		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/化工.owl");
+		owlTest.deal(dicDir + "/20140427.owl");
+//		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/" + args[1]);
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/20140427.owl");
 		System.err.println("本体解析完成");
 		System.err.println("索引创建");
-		creatIndexFromNeo4j.creatIndex(dicDir + "index2", 1);
+		GraphIndex.creatIndex(dicDir + "/index2", 1);
 		System.err.println("索引创建完成");
+		set();
 		StartService.start();
 		
 	}

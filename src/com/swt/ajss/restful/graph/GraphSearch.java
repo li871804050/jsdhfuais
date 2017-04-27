@@ -155,8 +155,7 @@ public class GraphSearch {
 			if (cyWheres.get(i).matches(".* or ")){
 				String cy = cyWheres.get(i);
 				cy = cy.substring(0, cy.length() - 3);
-				cyWheres.remove(i);
-				cyWheres.add(i, cy);
+				cyWheres.set(i, cy);
 			}
 		}
 			
@@ -231,8 +230,9 @@ public class GraphSearch {
 	 * @return 查询结果
 	 */
 	public static List<String> dealMoreEnt(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
-		List<String> paths = GraphPath.getPathRelation(ent);//计算实体的路径
+		List<String> paths = GraphPath.getPathRelation(ent);//计算实体的路径		
 		List<String> reStrings = new ArrayList<>();
+		StartService.set();
 		for (String path: paths){
 			String cypher = "";
 			for (String key: cyMatches.keySet()){				
@@ -265,6 +265,8 @@ public class GraphSearch {
 		String cypher = "";			
 		cypher = "match (n1:" + ent.get(0) + ") " + cyWhere + " return n1";
 		System.out.println("1:" + cypher);
+		StartService.set();
+//		System.out.println(StartService.neo4jHandle.toString());
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 			return result;
@@ -285,6 +287,7 @@ public class GraphSearch {
 	 */
 	public static String dealRelEnt(List<String> ent, String cyWhere, List<String> relationShip) {
 		String cypher = "";
+		StartService.set();
 		if (ent.get(0).equals(relationShip.get(0))){
 			cypher = "";
 			cypher = "match p = (n1:" + ent.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") " + cyWhere + " return p";
@@ -329,7 +332,7 @@ public class GraphSearch {
 	public static String dealRelOnly(List<String> relationShip) {
 		String cypher = "";
 		cypher = "match p = (:" + relationShip.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") return p";
-		
+		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 			System.out.println("3:" + cypher);
@@ -344,7 +347,7 @@ public class GraphSearch {
 	public static String getShortPathTwo(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
-		
+		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 			System.out.println("4:" + cypher);
@@ -359,7 +362,7 @@ public class GraphSearch {
 	public static String getPathAll(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..3]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
-		
+		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 			System.out.println("5:" + cypher);
@@ -374,7 +377,7 @@ public class GraphSearch {
 	public static String getShortPathOne(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(0) + "))" + cyWhere + " return p";
-		
+		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 			System.out.println("6:" + cypher);
@@ -389,6 +392,7 @@ public class GraphSearch {
 	 */
 	public static String dealRelEntTwo(List<String> relationShip, List<String> ent, String cyWhere, Map<String, Integer> cyMatches) {
 		// TODO Auto-generated method stub
+		StartService.set();
 		String cypher = "";
 		if (cyMatches.containsKey(ent.get(0))){
 			cypher = "match p = (n" + cyMatches.get(ent.get(0)) + ":" + ent.get(0) + ")-[:" + relationShip.get(2) + "]-(n";

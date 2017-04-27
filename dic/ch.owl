@@ -1,0 +1,1067 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/admin/ontologies/2017/3/untitled-ontology-13"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://www.semanticweb.org/admin/ontologies/2017/3/untitled-ontology-13">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#GHS"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ⅰ级"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ⅱ级"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ⅲ级"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#严重眼损伤_眼刺激"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#事故信息"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#事故板块"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#事故类型"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#交通运输"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#储存运输"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其他"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其他事故"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其他化学物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#加压气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工生产"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工行业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害水生环境_急性危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害水生环境_长期危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害臭氧层"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危险货物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#吸入危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#呼吸道或皮肤致敏"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#急性毒性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃液体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#有机过氧化物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性液体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#泄露"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#火灾"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#爆炸"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#爆炸物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#特异性靶器官毒性_一次接触"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#特异性靶器官毒性_反复接触"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生产企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生殖毒性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生殖细胞致突变性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#皮肤腐蚀_刺激"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自反应物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自热物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自燃固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自燃液体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#致癌性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#贸易型进口企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#遇水放出易燃气体的物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#重大危险源"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#金属腐蚀物"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#事故企业"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#事故物质"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#事故物资"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#原料"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#所属企业"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#生产"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#禁配物"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pH值"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#临界压力"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#临界温度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#临界温度(℃)"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故原因"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故响应"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故板块"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故类型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故经过"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故装置"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故设备"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业代码"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业规模"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#健康危险"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分子式"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分解温度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化学品中文名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化学品名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化学品英文名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#单位性质"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险反应"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险源性质"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险级别"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#国家省份"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#地址"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#安全存储"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#废弃处理"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#成立日期"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否在城区内"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否完善监控设施"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否属于生产装置"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否涉及毒性气体液化气体剧毒液体"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否装备安全仪表系统"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否装备紧急停车系统"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#死亡人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#沸点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#沸点(℃)"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#熔点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#熔点(℃)"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#燃烧热"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#爆炸上限"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#爆炸下限"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物理和化学危险"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#环境危害"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对分子质量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对密度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对密度(水=1)"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对蒸汽密度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#省份"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#省份-国家"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#稳定性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#紧急情况概述"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#结构式"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#职工人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#联系电话"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#轻伤人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#邮编"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#重伤人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#重大危险源名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#闪点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#预防措施"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#饱和蒸气压"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#饱和蒸气压(kPa)"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#黏度"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#GHS"/>
+        <Class IRI="#化学品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ⅰ级"/>
+        <Class IRI="#重大危险源"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ⅱ级"/>
+        <Class IRI="#重大危险源"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ⅲ级"/>
+        <Class IRI="#重大危险源"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#严重眼损伤_眼刺激"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#事故企业"/>
+            <Class IRI="#化工企业"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#事故物质"/>
+            <Class IRI="#化学品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故原因"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故板块"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故类型"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故经过"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故装置"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故设备"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#国家省份"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#死亡人数"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#轻伤人数"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故信息"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#重伤人数"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故板块"/>
+        <Class IRI="#事故信息"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#事故类型"/>
+        <Class IRI="#事故信息"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#交通运输"/>
+        <Class IRI="#事故板块"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#储存运输"/>
+        <Class IRI="#事故板块"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#其他"/>
+        <Class IRI="#化工企业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#其他事故"/>
+        <Class IRI="#事故类型"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#其他化学物质"/>
+        <Class IRI="#化学品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#加压气体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#原料"/>
+            <Class IRI="#化学品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#禁配物"/>
+            <Class IRI="#化学品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#pH值"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#临界压力"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#临界温度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#事故响应"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#健康危险"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#分子式"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#分解温度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#化学品名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#化学品英文名"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#危险反应"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#安全存储"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#废弃处理"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#沸点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#熔点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#燃烧热"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#爆炸上限"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#爆炸下限"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#物理和化学危险"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#环境危害"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#相对分子质量"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#相对密度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#相对蒸汽密度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#稳定性"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#紧急情况概述"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#结构式"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#闪点"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#预防措施"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#饱和蒸气压"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化学品"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#黏度"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#生产"/>
+            <Class IRI="#化学品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#企业代码"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#企业名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#企业规模"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#单位性质"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#地址"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#成立日期"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#省份"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#职工人数"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#联系电话"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工企业"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#邮编"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工生产"/>
+        <Class IRI="#事故板块"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#危害水生环境_急性危害"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#危害水生环境_长期危害"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#危害臭氧层"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#危险货物"/>
+        <Class IRI="#化学品"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#吸入危害"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#呼吸道或皮肤致敏"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#急性毒性"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#易燃固体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#易燃气体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#易燃液体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#有机过氧化物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#氧化性固体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#氧化性气体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#氧化性液体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#泄露"/>
+        <Class IRI="#事故类型"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#火灾"/>
+        <Class IRI="#事故类型"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#爆炸"/>
+        <Class IRI="#事故类型"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#爆炸物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#特异性靶器官毒性_一次接触"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#特异性靶器官毒性_反复接触"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#生产企业"/>
+        <Class IRI="#化工企业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#生殖毒性"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#生殖细胞致突变性"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#皮肤腐蚀_刺激"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#自反应物质和混合物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#自热物质和混合物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#自燃固体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#自燃液体"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#致癌性"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#贸易型进口企业"/>
+        <Class IRI="#化工企业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#遇水放出易燃气体的物质和混合物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#所属企业"/>
+            <Class IRI="#化工企业"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#企业规模"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#单位性质"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#危险源性质"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#危险级别"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#地址"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否在城区内"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否完善监控设施"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否属于生产装置"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否涉及毒性气体液化气体剧毒液体"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否装备安全仪表系统"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#是否装备紧急停车系统"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#重大危险源"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#重大危险源名称"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#金属腐蚀物"/>
+        <Class IRI="#GHS"/>
+    </SubClassOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

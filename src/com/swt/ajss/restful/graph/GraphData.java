@@ -13,7 +13,9 @@ import com.swt.ajss.restful.service.StartService;
 
 public class GraphData {
 	
-	
+	public static void main(String[] args) {
+		getRel("52770");
+	}
 	
 	/*
 	 * 查询结果实体统计
@@ -132,8 +134,44 @@ public class GraphData {
 			datas.add(pros);
 		}
 		
-		return new ArrayList<>(datas);
-		
+		return new ArrayList<>(datas);		
 	}
 
+	
+	/**
+	 * 
+	 * @param id 节点id
+	 * @return 节点关系
+	 */
+	public static String getRel(String id) {
+		String cypher = "start n = node(" + id + ") match (n)-[r]-() return distinct type(r)";
+		StartService.set();
+		String result = StartService.connection.exectCypher1(cypher);
+		System.out.println(result);
+		if (result.contains("data")){
+			JSONObject object = JSONObject.parseObject(result);
+			String data = object.getString("data");
+			System.err.println(data);
+			if (!data.equals("[]")){
+				data = "[[\"所有\"]," + data.substring(1);
+			}else {
+				data = "[]";
+			}
+			return data;
+		}else {
+			return "[]";
+		}
+		
+	}
+	
+	public static String getRelAll(String id, String rel) {
+		String cypher = "start n = node(" + id + ") match p = (n)-[r:" + rel + "]-(m) return p";
+		StartService.set();
+		String result = StartService.neo4jHandle.getCypherResult(cypher);
+//		data = data.replace("[", "").replace("]", "");
+//		String[] datas = data.split(",");
+//		
+		return result;		
+	}
+	
 }

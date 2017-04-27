@@ -12,9 +12,12 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.DocValuesType;
 import org.apache.lucene.index.FieldInvertState;
+import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -24,6 +27,7 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermStatistics;
+import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.search.similarities.TFIDFSimilarity;
@@ -53,9 +57,9 @@ public class GraphIndex {
 	public static String indexPath = StartService.dicDir + "/index2";
 	public static void main(String[] args) {
 
-		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/化工.owl");
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/ch.owl");
 //		creatIndex(indexPath, 1);
-		List<String> reStrings = searchIndex(indexPath, "子公司");
+		List<String> reStrings = searchIndex(indexPath, "硝酸");
 		for (int i = 0; i < reStrings.size(); i++){
 			System.out.println(reStrings.get(i));
 		}
@@ -63,7 +67,7 @@ public class GraphIndex {
 	
 	
 	/**
-	 * 
+	 * 查找没结果 最大问题，阈值设置太大
 	 * @param dicDir 索引文件目录
 	 * @param anChose 分词器选择，1为hanlp分词器，其他为Lucene自带标准分词器
 	 * @param 对图数据库中的KEYFIELD_3，KEYFIELD_1，关系名创建索引
@@ -88,7 +92,8 @@ public class GraphIndex {
 			}else {
 				analyzer = new StandardAnalyzer();
 			}
-			IndexWriterConfig config = new IndexWriterConfig(analyzer);			 
+			IndexWriterConfig config = new IndexWriterConfig(analyzer);	
+			
 			IndexWriter writer = new IndexWriter(directory, config);
 						
 //			String[] labels = {"ClassID1", "ClassID1Name", "ClassID2", "ClassID2Name", "ClassID3", "ClassID3Name", "ClassID", "ClassID4Name", "conf", "label", "lift", "Price_Com", "Price_Must" ,"rulePR", "sku", "SkuName", "Standards", "sup", "Time_Def", "Unit_Sale"};
@@ -98,7 +103,9 @@ public class GraphIndex {
 			//实体类型为文件输入
 			//
 			
-			
+			FieldType fieldType = new FieldType();
+			fieldType.setStored(true);
+			fieldType.setIndexOptions(IndexOptions.DOCS);
 			for (String key: pros.keySet()){
 				List<String> labels = pros.get(key);
 				/*
@@ -108,9 +115,9 @@ public class GraphIndex {
 				 * 属性名为y
 				 * */
 				Document documnet = new Document();
-				Field field1 = new TextField(KEYFIELD_1, KEYWORDS_1, Field.Store.YES);
-				Field field2 = new TextField(KEYFIELD_3, key, Field.Store.YES);
-				Field field3 = new TextField(KEYFIELD_2, key, Field.Store.YES);
+				Field field1 = new Field(KEYFIELD_1, KEYWORDS_1, fieldType);
+				Field field2 = new Field(KEYFIELD_3, key, fieldType);
+				Field field3 = new Field(KEYFIELD_2, key, fieldType);
 				documnet.add(field1);
 				documnet.add(field2);
 				documnet.add(field3);
@@ -132,9 +139,9 @@ public class GraphIndex {
 					 * */
 						pro = pro.replace("\\", ".+");
 						documnet = new Document();
-						field1 = new TextField(KEYFIELD_1, key, Field.Store.YES);
-						field2 = new TextField(KEYFIELD_3, pro, Field.Store.YES);
-						field3 = new TextField(KEYFIELD_2, label, Field.Store.YES);
+						field1 = new Field(KEYFIELD_1, key, fieldType);
+						field2 = new Field(KEYFIELD_3, pro, fieldType);
+						field3 = new Field(KEYFIELD_2, label, fieldType);
 						documnet.add(field1);
 						documnet.add(field2);
 						documnet.add(field3);
@@ -154,9 +161,9 @@ public class GraphIndex {
 			List<String> reList = OntologyAnalyzer.getRelation();
 			for (String rel: reList){
 				String[] relDatas = rel.split("-");
-				Field field1 = new TextField(KEYFIELD_1, relDatas[0]+ LINK_2 + relDatas[1], Field.Store.YES);
-				Field field2 = new TextField(KEYFIELD_3, relDatas[2], Field.Store.YES);
-				Field field3 = new TextField(KEYFIELD_2, relDatas[2], Field.Store.YES);
+				Field field1 = new Field(KEYFIELD_1, relDatas[0]+ LINK_2 + relDatas[1], fieldType);
+				Field field2 = new Field(KEYFIELD_3, relDatas[2], fieldType);
+				Field field3 = new Field(KEYFIELD_2, relDatas[2], fieldType);
 //				String result = "";
 //				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
 //				result = StartService.connection.exectCypher1(cypher);
@@ -176,9 +183,9 @@ public class GraphIndex {
 			
 			List<String> levelSet = OntologyAnalyzer.getEntity();
 			for (String rel: levelSet){
-				Field field1 = new TextField(KEYFIELD_1, KEYWORDS_1, Field.Store.YES);
-				Field field2 = new TextField(KEYFIELD_3, rel, Field.Store.YES);
-				Field field3 = new TextField(KEYFIELD_2, rel, Field.Store.YES);
+				Field field1 = new Field(KEYFIELD_1, KEYWORDS_1, fieldType);
+				Field field2 = new Field(KEYFIELD_3, rel, fieldType);
+				Field field3 = new Field(KEYFIELD_2, rel, fieldType);
 //				String result = "";
 //				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
 //				result = StartService.connection.exectCypher1(cypher);
@@ -221,7 +228,9 @@ public class GraphIndex {
 	 * @param keyWord	查找的内容
 	 * @return 在索引文件中查找到的所有结果
 	 */
-    public static List<String> searchIndex(String indexDir, String keyWord) {    	List<String> result = new ArrayList<>();
+    public static List<String> searchIndex(String indexDir, String keyWord) {    	
+    	
+    	List<String> result = new ArrayList<>();
 		if ("".equals(keyWord) || keyWord == null){
 			return result;
 		}
@@ -229,6 +238,7 @@ public class GraphIndex {
         	Path path = Paths.get(indexDir);
             Directory dir = FSDirectory.open(path);
             IndexReader reader = DirectoryReader.open(dir);
+//            Similarity similarity = new BM25Similarity();
             Similarity similarity = new ClassicSimilarity();
 //            Similarity similarity = new Similarity() {
 //				
@@ -256,10 +266,10 @@ public class GraphIndex {
             QueryBuilder builder = new QueryBuilder(analyzer);
 //            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
             Query query = builder.createPhraseQuery(KEYFIELD_3, keyWord);
-            ScoreDoc[] sd = searcher.search(query, 1000).scoreDocs;
+            ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
           
-            for (int i = 0; i < sd.length; i++) {
-            	if (sd[i].score > 7.0){
+            for (int i = 0; i < sd.length; i++) {  
+            	if (sd[i].score > 3.0){
 	                Document hitDoc = reader.document(sd[i].doc);
 	                String en = hitDoc.get(KEYFIELD_1);
 	                String pN = hitDoc.get(KEYFIELD_2);

@@ -46,7 +46,7 @@ public class GraphMap {
 				}
 			}	
 		}else {
-			String cypher = "match (n:化工企业)-[:生产]-(m) where n.重大危险源 = '是' return m,n";
+			String cypher = "match (n:化工企业)-[:生产]-(m) where n.重大危险源 = '是' and n.经度 =~ '[0-9.]+' return m,n";
 			String result = StartService.neo4jHandle.getCypherResult(cypher);
 			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
 				return getMapJson(result);

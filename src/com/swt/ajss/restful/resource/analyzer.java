@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,11 +22,37 @@ import com.swt.ajss.restful.service.StartService;
  * Created by Administrator on 2017/3/23.
  */
 public class analyzer {
-    public static void main(String[] arg){
+//    public static void main(String[] arg){
 //        System.out.println(neo4jHandle.getCypherResult("match (n:技术开锁), (m:技术开锁) where n.作案手段 = m.作案手段 and n.部位 = m.部位 and n <> m return n, m limit 10"));
 //    	getCX();
-    	getSame("案件");
-    }
+//    	getSame("案件");
+    	public static void main(String[] args) {
+    		try {
+    			BufferedReader reader = new BufferedReader(new FileReader(new File("E:/360data/重要数据/桌面/Cypher.txt")));
+    			FileWriter writer = new FileWriter("E:/360data/重要数据/桌面/cypher.csv");
+    			String line = "";
+    			String fir = "";
+    			int i = 0;
+    			StartService.set();
+    			while ((line = reader.readLine()) != null){
+//    				i = i + 1;
+//    				line = line.replace("a", "a" + i);
+//    				line = line.replace("b", "b" + i);
+//    				writer.write(line + "\r\n"); 
+    				StartService.connection.exectCypher1(line);
+    			}
+    			writer.close();
+    			reader.close();
+    		} catch (FileNotFoundException e) {
+    			// TODO 自动生成的 catch 块
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO 自动生成的 catch 块
+    			e.printStackTrace();
+    		}
+    		
+    	}
+//    }
     
     public static Map<String, List> getCX(){
     	StartService.set();
@@ -166,4 +193,6 @@ public class analyzer {
     	
 		return object.toJSONString();
 	}
+    
+    
 }
