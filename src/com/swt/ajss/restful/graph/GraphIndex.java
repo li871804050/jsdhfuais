@@ -71,6 +71,7 @@ public class GraphIndex {
 	
 	/**
 	 * 查找没结果 最大问题，阈值设置太大
+	 * 对实体和关系的权重进行了调整
 	 * @param dicDir 索引文件目录
 	 * @param anChose 分词器选择，1为hanlp分词器，其他为Lucene自带标准分词器
 	 * @param 对图数据库中的KEYFIELD_3，KEYFIELD_1，关系名创建索引
@@ -101,7 +102,7 @@ public class GraphIndex {
 						
 			//labels 应该为文件输入
 			Map <String, List<String>> pros = OntologyAnalyzer.getproperty();
-//			String ent = "Store0044";
+
 			//实体类型为文件输入
 			//
 			
@@ -119,7 +120,7 @@ public class GraphIndex {
 				Document documnet = new Document();
 				Field field1 = new Field(KEYFIELD_1, KEYWORDS_1, fieldType);
 				Field field2 = new Field(KEYFIELD_3, key, fieldType);
-//				field2.setBoost(2.0f);
+				field2.setBoost(2.0f);
 				Field field3 = new Field(KEYFIELD_2, key, fieldType);
 				documnet.add(field1);
 				documnet.add(field2);
@@ -166,6 +167,7 @@ public class GraphIndex {
 				String[] relDatas = rel.split("-");
 				Field field1 = new Field(KEYFIELD_1, relDatas[0]+ LINK_2 + relDatas[1], fieldType);
 				Field field2 = new Field(KEYFIELD_3, relDatas[2], fieldType);
+				field2.setBoost(2.0f);
 				Field field3 = new Field(KEYFIELD_2, relDatas[2], fieldType);
 //				String result = "";
 //				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				
@@ -188,6 +190,7 @@ public class GraphIndex {
 			for (String rel: levelSet){
 				Field field1 = new Field(KEYFIELD_1, KEYWORDS_1, fieldType);
 				Field field2 = new Field(KEYFIELD_3, rel, fieldType);
+				field2.setBoost(2.0f);
 				Field field3 = new Field(KEYFIELD_2, rel, fieldType);
 //				String result = "";
 //				String cypher = "MATCH (n:" + relDatas[0] +")-[r:" + relDatas[2] + "]-(" + relDatas[1] + ") RETURN DISTINCT r.sup";				

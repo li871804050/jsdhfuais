@@ -1,9 +1,5 @@
 package algorithm;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +12,6 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.zip.InflaterOutputStream;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -31,36 +26,19 @@ import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.UndirectedGraph;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import com.shuwei.graph.algorithm.GraphAlgorithm;
 import com.shuwei.graph.inter.SWGraph;
 import com.shuwei.graph.util.GraphInstance;
 import com.swt.ajss.restful.algorthm.Degree;
 import com.swt.ajss.restful.algorthm.Result;
 
-//import net.sf.json.JSONArray;
-//
-//import com.shuwei.graph.algorithm.GraphAlgorithm;
-//import com.shuwei.graph.inter.SWGraph;
-//import com.shuwei.graph.util.GraphInstance;
-//import com.sun.jersey.spi.resource.Singleton;
-
-//import net.sf.json.JSONArray;
-//
-//import com.shuwei.graph.algorithm.GraphAlgorithm;
-//import com.shuwei.graph.inter.SWGraph;
-//import com.shuwei.graph.util.GraphInstance;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Path("algorithm")
 public class Algorithm {
 	
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
 	@POST
 	@Path("cc")
 	@Produces("application/json")
@@ -79,10 +57,7 @@ public class Algorithm {
 		
 	}
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("cc_define")
 	@Produces("application/json")
@@ -101,10 +76,7 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("pagerank")
 	@Produces("application/json")
@@ -128,10 +100,7 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("pagerank_define")
 	@Produces("application/json")
@@ -154,10 +123,7 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("trianglecount")
 	@Produces("application/json")
@@ -189,10 +155,7 @@ public class Algorithm {
 		
 	}
 	
-	/**
-	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("trianglecount_define")
 	@Produces("application/json")
@@ -391,10 +354,7 @@ public class Algorithm {
 		
 	}
 	
-	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("degree")
 	@Produces("application/json")
@@ -426,10 +386,7 @@ public class Algorithm {
 		
 	}
 	
-	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("degree_define")
 	@Produces("application/json")
@@ -461,10 +418,7 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("shortestpath_define")
 	@Produces("application/json")
@@ -496,10 +450,7 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
-	 */
+	
 	@POST
 	@Path("computeModularity_define")
 	@Produces("application/json")
@@ -567,12 +518,6 @@ public class Algorithm {
 	}
 	
 	
-	/**
-	 * �����Զ����ͼjson��ʽ
-	 * @param deginJson
-	 * @return
-	 * @throws IOException 
-	 */
 	public static SWGraph parseTheDefineGraphJson(String key,String degfinJson) {
 		
 		SWGraph sg=GraphInstance.getInstanceOfGraph(key);

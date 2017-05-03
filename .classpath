@@ -11,7 +11,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/fastjson/fastjson-1.2.17.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdom-2.0.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ShuWeiGraphAlgorithm_fat.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ShuWeiGraphAlgorithm_fat.jar" sourcepath="D:/lyl/ShuWeiGraphAlgorithm"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/swt/commands.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/swt/common.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/swt/jface.jar"/>
