@@ -14,7 +14,7 @@ import com.swt.ajss.restful.service.StartService;
 public class GraphData {
 	
 	public static void main(String[] args) {
-		getRel("52770");
+		getRel("69997");
 	}
 	
 	/*
@@ -151,8 +151,11 @@ public class GraphData {
 		if (result.contains("data")){
 			JSONObject object = JSONObject.parseObject(result);
 			String data = object.getString("data");
-			System.err.println(data);
 			if (!data.equals("[]")){
+				List<String> relSame = OntologyAnalyzer.getRelSame();
+				for (String rel: relSame){
+					data = data.replace("[\"" + rel + "\"]", "[\"" + rel + "r\"],[\"" + rel + "l\"]");
+				}
 				data = "[[\"所有\"]," + data.substring(1);
 			}else {
 				data = "[]";

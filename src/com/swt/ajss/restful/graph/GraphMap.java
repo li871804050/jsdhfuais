@@ -11,11 +11,12 @@ public class GraphMap {
 	public static void main(String[] args) {
 //		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20170417.owl");	
 //		GraphPath.getRelationGraph();
-		String cypher = "MATCH p=()-[r:`子公司`]->() RETURN p LIMIT 25";
-		StartService.set();
+//		String cypher = "MATCH p=()-[r:`子公司`]->() RETURN p LIMIT 25";
+//		StartService.set();
 //		System.out.println(StartService.neo4jHandle.toString());
-		String result = StartService.neo4jHandle.getCypherResult(cypher);
-		System.out.println(result);
+//		String result = StartService.neo4jHandle.getCypherResult(cypher);
+//		System.out.println(result);
+		System.out.println(analyzeMap("#"));
 	}
 	
 	public static void name() {
@@ -33,41 +34,48 @@ public class GraphMap {
 	 * @return
 	 */
 	public static String analyzeMap(String id) {
+		StartService.set();
 		if (!"#".equals(id)){
-			String cypher = "start n = node (" + id + ") match (n:化工企业)-[:子公司]-(m:化工企业)-[:生产]-(k) return m,k";
+//			String cypher = "start n = node (" + id + ") match (n:化工企业)-[:子公司]-(m:化工企业)-[:生产]-(k) return m,k";
+			String cypher = "start n = node (" + id + ") match (n:化工企业)-[:生产]-(k) return n,k";
 			String result = StartService.neo4jHandle.getCypherResult(cypher);
 			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
-				return getMapJson(result);
+				String[] pros = {"化学品名称", "企业名称", "经度", "纬度"};
+				String[] keys = {"source", "conment", "longitude", "latitude"};
+				return getMapJson(keys, pros, result);
 			}else {
-				cypher = "start n = node (" + id + ") match (n:化工产品)-[:生产]-(m:化工企业) return m,n";
+				cypher = "start n = node (" + id + ") match (n:化学品)-[:生产]-(m:化工企业) return m,n";
 				result = StartService.neo4jHandle.getCypherResult(cypher);
-				if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
-					return getMapJson(result);
+				if (result.contains("graph") && result.contains("nodes")){
+					String[] pros = {"化学品名称", "企业名称", "经度", "纬度"};
+					String[] keys = {"source", "conment", "longitude", "latitude"};
+					return getMapJson(keys, pros, result);
 				}
 			}	
 		}else {
-			String cypher = "match (n:化工企业)-[:生产]-(m) where n.重大危险源 = '是' and n.经度 =~ '[0-9.]+' return m,n";
+			String cypher = "match (n:重大危险源) where n.经度 =~ '[0-9.]+' return n";
 			String result = StartService.neo4jHandle.getCypherResult(cypher);
 			if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
-				return getMapJson(result);
+				String[] pros = {"危险源性质" ,"重大危险源名称", "经度", "纬度"};
+				String[] keys = {"source" ,"conment", "longitude", "latitude"};
+				return getMapJson(keys, pros, result);
 			}
 		}
 		return "";
 	}
 	
 	
-	public static String getMapJson(String result) {
-		String[] pros = {"中文名称", "公司名", "经度", "纬度"};
+	public static String getMapJson(String[] keys, String[] pros, String result) {
+
 		List<Map<String, String>> res = GraphData.getPros(pros, result);
 		double maxL = -0.1, minL = -0.1, maxW = -0.1, minW = -0.1;
 		JSONArray array = new JSONArray();
 		for (Map<String, String> re: res){			
-			if (re.size() == 4 && re.get("经度").matches("[0-9.]+") && re.get("纬度").matches("[0-9.]+")){
+			if (re.size() == pros.length && re.get("经度").matches("[0-9.]+") && re.get("纬度").matches("[0-9.]+")){
 				JSONObject object = new JSONObject();
-				object.put("conment", re.get("公司名"));
-				object.put("source", re.get("中文名称"));
-				object.put("longitude", re.get("经度"));
-				object.put("latitude", re.get("纬度"));
+				for (int i = 0; i < keys.length; i++){
+					object.put(keys[i], re.get(pros[i]));			
+				}
 				array.add(object);
 				if (minL == -0.1 || (minL > Double.parseDouble(re.get("经度")))){
 					minL = Double.parseDouble(re.get("经度"));

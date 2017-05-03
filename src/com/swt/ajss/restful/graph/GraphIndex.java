@@ -96,7 +96,6 @@ public class GraphIndex {
 			
 			IndexWriter writer = new IndexWriter(directory, config);
 						
-//			String[] labels = {"ClassID1", "ClassID1Name", "ClassID2", "ClassID2Name", "ClassID3", "ClassID3Name", "ClassID", "ClassID4Name", "conf", "label", "lift", "Price_Com", "Price_Must" ,"rulePR", "sku", "SkuName", "Standards", "sup", "Time_Def", "Unit_Sale"};
 			//labels 应该为文件输入
 			Map <String, List<String>> pros = OntologyAnalyzer.getproperty();
 //			String ent = "Store0044";
@@ -117,6 +116,7 @@ public class GraphIndex {
 				Document documnet = new Document();
 				Field field1 = new Field(KEYFIELD_1, KEYWORDS_1, fieldType);
 				Field field2 = new Field(KEYFIELD_3, key, fieldType);
+//				field2.setBoost(2.0f);
 				Field field3 = new Field(KEYFIELD_2, key, fieldType);
 				documnet.add(field1);
 				documnet.add(field2);
@@ -269,7 +269,7 @@ public class GraphIndex {
             ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
           
             for (int i = 0; i < sd.length; i++) {  
-            	if (sd[i].score > 3.0){
+            	if (sd[i].score > 1.0){
 	                Document hitDoc = reader.document(sd[i].doc);
 	                String en = hitDoc.get(KEYFIELD_1);
 	                String pN = hitDoc.get(KEYFIELD_2);

@@ -202,7 +202,14 @@ public class searchData {
 		casetype = paramJSON.getString("casetype");
 		return GraphData.getRel(casetype);
 	}
+
 	
+	/**
+	 * 暂时没被使用
+	 * 展示对应节点下的某种关系
+	 * @param casetype
+	 * @return
+	 */
 	@POST
 	@Path("/relAll")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -221,6 +228,36 @@ public class searchData {
 	}
 
 	
+	
+	@POST
+	@Path("/relType")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getRelType(){
+	
+		System.out.println("关系级别!");
+//		JSONObject paramJSON = JSON.parseObject(dataStr);
+//		System.err.println("搜索!");
+//		System.out.println(paramJSON.toString());
+		//搜索结果		
+		return OntologyAnalyzer.relationType();
+	}
+	
+	@POST
+	@Path("/labelPro")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getLabelPro(){
+	
+		System.out.println("默认属性显示!");
+//		JSONObject paramJSON = JSON.parseObject(dataStr);
+//		System.err.println("搜索!");
+//		System.out.println(paramJSON.toString());
+		//搜索结果		
+		return OntologyAnalyzer.getLabelPro();
+	}
+
+	
 	@POST
 	@Path("/anjian/all")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -234,17 +271,16 @@ public class searchData {
 		//搜索结果
 
 		//在这里把结果加入到JSON
-		String line = "";
-		try {
-			Map<String, List> map = new HashMap<>();
-			BufferedReader reader = new BufferedReader(new FileReader(new File(StartService.dicDir + "/level2.txt")));
-			line = reader.readLine().replace(",{}", "");
-
-		}catch (IOException e){
-
-		}
-//		String line = OntologyAnalyzer.getjsonLevel();
-		System.out.println(line);
+//		String line = "";
+//		try {
+//			Map<String, List> map = new HashMap<>();
+//			BufferedReader reader = new BufferedReader(new FileReader(new File(StartService.dicDir + "/level2.txt")));
+//			line = reader.readLine().replace(",{}", "");
+//
+//		}catch (IOException e){
+//
+//		}
+		String line = OntologyAnalyzer.getjsonLevel();
 		return line;
 	}
 

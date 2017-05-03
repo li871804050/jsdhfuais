@@ -1,17 +1,14 @@
 package com.swt.ajss.restful.resource;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.swt.ajss.restful.service.StartService;
 
 
 public class addLable {
+	public static void main(String[] args) {
+		startLabel2();
+	}
 	
 	public static void startLabel() {
 //		List<String> list = read();
@@ -96,4 +93,23 @@ public class addLable {
 //		}		
 //		return list;
 //	}
+	
+	
+	public static void startLabel2() {
+		StartService.set();
+		String wString = "严重眼损伤_眼刺激	加压气体	化学不稳定性气体	危害水生环境_急性危害	危害水生环境_长期危害	危害臭氧层	吸入危害	呼吸道致敏物	异性靶器官毒性_一次接触	急性毒性_吸入	急性毒性_经口	急性毒性_经皮	易燃固体	易燃气体	易燃液体	有机过氧化物	氧化性固体	氧化性气体	氧化性液体	爆炸物	特异性靶器官毒性_一次接触	特异性靶器官毒性_反复接触	生殖毒性	生殖细胞致突变性	皮肤腐蚀_刺激	皮肤致敏物	自反应物质和混合物	自热物质和混合物	自燃固体	自燃液体	致癌性	遇水放出易燃气体的物质和混合物	金属腐蚀物";
+		String[] datas = wString.split("	");
+		for (String data: datas){
+			StartService.connection.exectCypher("match (n:" + data + ") set n:GHS:化学品:化工行业");
+		}
+		
+		wString = "放射性物质	易燃固体_易于自燃的物质_遇水放出易燃气体的物质	易燃液体物质	杂项危险物质和物品	毒性物质和感染性物质	气体	氧化性物质和有机过氧化物	爆炸品	腐蚀性物质	";
+		datas = wString.split("	");
+		for (String data: datas){
+			StartService.connection.exectCypher("match (n:" + data + ") set n:危险货物:化学品:化工行业");
+		}
+		StartService.connection.exectCypher("match (n:重大危险源) set n:化工行业");
+		StartService.connection.exectCypher("match (n:事故信息) set n:化工行业");
+		StartService.connection.exectCypher("match (n:化工企业) set n:化工行业");
+	}
 }

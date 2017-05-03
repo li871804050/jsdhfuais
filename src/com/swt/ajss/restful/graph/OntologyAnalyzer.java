@@ -16,6 +16,7 @@ import org.jdom2.input.SAXBuilder;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.swt.ajss.restful.service.owlTest;
 
 /**
  * 
@@ -28,6 +29,13 @@ public class OntologyAnalyzer {
 	private static HashMap<String, List<String>> property = new HashMap<>();	//实体属性
 	private static List<String> relation = new ArrayList<>();				//关系
 	private static JSONArray array = new JSONArray();						//层级json数组
+	private static List<String> relSame = new ArrayList<>();						//层级json数组
+	
+	
+	public static void main(String[] args) {
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
+		System.out.println(getjsonLevel());
+	}
 	
 	/**
 	 * 
@@ -39,6 +47,7 @@ public class OntologyAnalyzer {
 			SAXBuilder builder = new SAXBuilder();//实例JDOM解析器  
 	        Document document = builder.build(filePath);
 			Element root = document.getRootElement();
+			HashMap<String, List<String>> levelCopy = new HashMap<>();
 			Namespace ns = Namespace.getNamespace("http://www.w3.org/2002/07/owl#");
 			List<Element> elements = root.getChildren("SubClassOf", ns);
 			for (Element e: elements){
@@ -60,10 +69,12 @@ public class OntologyAnalyzer {
 						String second = elements2.get(1).getAttributeValue("IRI").replace("#", "");
 						if (level.containsKey(second)){
 							level.get(second).add(first);
+							levelCopy.get(second).add(first);
 						}else{
 							List<String> next = new ArrayList<>();
 							next.add(first);
 							level.put(second, next);
+							levelCopy.put(second, next);
 						}
 					}
 				}
@@ -74,6 +85,9 @@ public class OntologyAnalyzer {
 					String relName = OBFrom.getChild("ObjectProperty", ns).getAttributeValue("IRI").replace("#", "");
 //					System.err.println(relFirst + "-" + entrity + "-" + relName);
 					relation.add(relFirst + "-" + entrity + "-" + relName);
+					if (relFirst.equals(entrity)){
+						relSame.add(relName);
+					}
 				} catch (NullPointerException e3) {
 //					System.out.println(e.getChild("Class", ns).getAttributeValue("IRI").replace("#", ""));
 					// TODO: handle exception
@@ -83,14 +97,15 @@ public class OntologyAnalyzer {
 			boolean child = true;
 			List<String> keyAll = new ArrayList<>();
 			List<String> allPro = new ArrayList<>();
+			
 			JSONObject arrayAll = new JSONObject();
 			while (true) {
 //				System.out.println(level.size());
-				List<String> keys2 = new ArrayList<>(level.keySet());
+				List<String> keys2 = new ArrayList<>(levelCopy.keySet());
 				for (String key :keys2) {
 					child = true;
-					for (String ch : level.get(key)) {
-						if (level.containsKey(ch)) {
+					for (String ch : levelCopy.get(key)) {
+						if (levelCopy.containsKey(ch)) {
 							child = false;
 							break;
 						}
@@ -99,30 +114,34 @@ public class OntologyAnalyzer {
 						JSONObject object = new JSONObject();
 						object.put("name", key);
 						JSONArray array = new JSONArray();
-						List<String> keys = new ArrayList<>(level.get(key));
+						List<String> keys = new ArrayList<>(levelCopy.get(key));
 						for (String ch : keys) {
 							JSONObject object1 = new JSONObject();
 							allPro.add(ch);
 							if (arrayAll.containsKey(ch)) {
 //								System.err.println(arrayAll.get(ch));
-								array.add(arrayAll.get(ch));
+								if (!array.contains(arrayAll.get(ch))){
+									array.add(arrayAll.get(ch));
+								}
 							}else {
 								object1.put("name", ch);
 							}
-							array.add(object1);
+							if (!array.contains(object1)){
+								array.add(object1);
+							}
 						}
 						object.put("children", array);
 						arrayAll.put(key, object);
 						keyAll.add(key);
-						level.remove(key);
+						levelCopy.remove(key);
 					}
 				}
-				if (level.size() == 0){
+				if (levelCopy.size() == 0){
 					break;
 				}
 			}
 //			FileWriter writer5 = new FileWriter(new File(StartService.dicDir +  "/level2.txt"));
-			JSONArray array = new JSONArray();
+			array = new JSONArray();
 			for (String la: keyAll){
 				if (!allPro.contains(la)) {
 					array.add(arrayAll.get(la));
@@ -190,7 +209,7 @@ public class OntologyAnalyzer {
 	 * 只统计二级标签
 	 */
 	public static List<String> getLabel() {
-		List<String> list = new ArrayList<>();		
+		HashSet<String> list = new HashSet();		
 		for (String key: level.keySet()){
 			boolean find = false;
 			for (List<String> value: level.values()){
@@ -201,12 +220,31 @@ public class OntologyAnalyzer {
 			}
 			if (!find){
 				List<String> words = level.get(key);
-				for (String w: words){
-					list.add(w);
-				}
+				list.addAll(words);
 			}
 		}		
-		return list;		
+		return new ArrayList<>(list);		
+	}
+	
+	/**
+	 * 
+	 * @return 一级标签
+	 */
+	public static List<String> getLabelFirst() {
+		HashSet<String> list = new HashSet();		
+		for (String key: level.keySet()){
+			boolean find = false;
+			for (List<String> value: level.values()){
+				if (value.contains(key)){
+					find = true;
+					break;
+				}
+			}
+			if (!find){
+				list.add(key);
+			}
+		}		
+		return new ArrayList<>(list);		
 	}
 	
 	
@@ -239,4 +277,101 @@ public class OntologyAnalyzer {
 		return relation;
 		
 	}
+	
+	/**
+	 * 
+	 * @return 同类之间存在关系的实体集合
+	 */
+	public static List<String> getRelSame() {
+		return relSame;
+		
+	}
+	
+	/**
+	 * 
+	 * @return 关系名和其对应的行业
+	 */
+	public static String relationType() {
+		List<String> listRel = OntologyAnalyzer.getRelation();
+		HashMap<String, List<String>> listLevel = OntologyAnalyzer.getLevel();
+		List<String> listLable = OntologyAnalyzer.getLabelFirst();
+		HashMap<String, List<String>> mapRel = new HashMap<>();
+		for (int i = 0; i < listRel.size(); i++){
+			String strLevel = listRel.get(i);
+			String[] strLevels = strLevel.split("-");
+			String str = strLevels[0];
+			while (true){
+				for (String key: listLevel.keySet()){
+					if (listLevel.get(key).contains(str)){
+						str = key;
+						break;
+					}
+				}
+				if (listLable.contains(str)){
+					break;
+				}
+			}
+			if (mapRel.containsKey(str)){
+				mapRel.get(str).add(strLevels[2]);
+			} else {
+				List<String> reList = new ArrayList<>();
+				reList.add(strLevels[2]);
+				mapRel.put(str, reList);
+			}
+		}
+		JSONArray array = new JSONArray();
+		for (String key: mapRel.keySet()){
+			JSONObject object = new JSONObject();
+			object.put("name", key);
+			JSONArray array1 = new JSONArray();
+			for (int i = 0; i < mapRel.get(key).size(); i++){
+				JSONObject object1 = new JSONObject();
+				object1.put("name", mapRel.get(key).get(i));
+				array1.add(object1);
+			}
+			object.put("children", array1);
+			array.add(object);
+		}
+		return array.toJSONString();
+	}
+	
+	
+	public static String getLabelPro() {
+		HashMap<String, List<String>> mapLevel = OntologyAnalyzer.getLevel();
+		HashMap<String, List<String>> mapLabel = OntologyAnalyzer.getproperty();
+		HashMap<String, String> mapPro = new HashMap<>();
+
+		
+		for (String key: mapLabel.keySet()){
+			mapPro.put(key, mapLabel.get(key).get(0));
+		}
+		
+		while (true){
+			boolean hasFind = false;
+			List<String> keys = new ArrayList<>(mapPro.keySet());
+			for (String key: keys){
+				if (mapLevel.containsKey(key)){
+					for (int i = 0; i < mapLevel.get(key).size(); i++){
+						String levle = mapLevel.get(key).get(i);
+						if (!mapPro.containsKey(levle)){
+							hasFind = true;
+							mapPro.put(levle, mapPro.get(key));
+						}
+					}
+				}
+			}
+			if (!hasFind){
+				break;
+			}
+		}
+		JSONObject object = new JSONObject();
+		for (String key: mapPro.keySet()){
+			JSONObject object2 = new JSONObject();
+			object2.put("categoryAttribute", mapPro.get(key));
+			object.put(key, object2);
+		}
+		
+		return object.toJSONString();
+	}
+	
 }
