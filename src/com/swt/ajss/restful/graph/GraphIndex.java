@@ -22,11 +22,14 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.CollectionStatistics;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermStatistics;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
@@ -59,7 +62,7 @@ public class GraphIndex {
 
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/ch.owl");
 //		creatIndex(indexPath, 1);
-		List<String> reStrings = searchIndex(indexPath, "硝酸");
+		List<String> reStrings = searchIndex(indexPath, "我的世界");
 		for (int i = 0; i < reStrings.size(); i++){
 			System.out.println(reStrings.get(i));
 		}
@@ -263,9 +266,13 @@ public class GraphIndex {
             IndexSearcher searcher = new IndexSearcher(reader);
             searcher.setSimilarity(similarity);
             Analyzer analyzer = new HanLPAnalyzer();
+//            QueryBuilder builder = new QueryBuilder(analyzer);
+////            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
+//            Query query = builder.createPhraseQuery(KEYFIELD_3, keyWord);
             QueryBuilder builder = new QueryBuilder(analyzer);
-//            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
-            Query query = builder.createPhraseQuery(KEYFIELD_3, keyWord);
+            Query query1 = builder.createBooleanQuery(KEYFIELD_3, keyWord);
+            BooleanClause clause2 = new BooleanClause(query1, Occur.MUST);
+            BooleanQuery query = new BooleanQuery.Builder().add(clause2).build();
             ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
           
             for (int i = 0; i < sd.length; i++) {  

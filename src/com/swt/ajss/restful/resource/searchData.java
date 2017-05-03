@@ -1,41 +1,21 @@
 package com.swt.ajss.restful.resource;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.TreeMap;
 
-import javax.servlet.ServletContext;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.gephi.graph.api.Configuration;
-import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
-import org.gephi.graph.api.GraphModel;
-import org.gephi.graph.api.Node;
-import org.gephi.graph.api.UndirectedGraph;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -46,11 +26,9 @@ import com.shuwei.graph.util.GraphInstance;
 import com.swt.ajss.restful.algorthm.Degree;
 import com.swt.ajss.restful.algorthm.Neo4jHandle;
 import com.swt.ajss.restful.algorthm.Result;
-import com.swt.ajss.restful.algorthm.search;
 import com.swt.ajss.restful.graph.GraphData;
 import com.swt.ajss.restful.graph.GraphSearch;
 import com.swt.ajss.restful.graph.OntologyAnalyzer;
-import com.swt.ajss.restful.service.StartService;
 
 @Path("/query")
 public class searchData {
@@ -284,13 +262,19 @@ public class searchData {
 		return line;
 	}
 
+	
+	/**
+	 * 
+	 * @param label
+	 * @return 相似案件分析
+	 */
 	@POST
 	@Path("/anjian/same")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String sendSame(String label){
 
-		System.out.println("相似!");
+		System.out.println("相似案件分析!");
 //		JSONObject paramJSON = JSON.parseObject(dataStr);
 //		System.err.println("搜索!");
 //		System.out.println(paramJSON.toString());
