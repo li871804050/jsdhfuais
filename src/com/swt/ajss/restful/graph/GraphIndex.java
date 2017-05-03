@@ -62,7 +62,7 @@ public class GraphIndex {
 
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/ch.owl");
 //		creatIndex(indexPath, 1);
-		List<String> reStrings = searchIndex(indexPath, "我的世界");
+		List<String> reStrings = searchIndex(indexPath, "用药");
 		for (int i = 0; i < reStrings.size(); i++){
 			System.out.println(reStrings.get(i));
 		}
@@ -208,9 +208,7 @@ public class GraphIndex {
 				writer.addDocument(documnet);
 //				}
 			}
-			
-			
-			
+						
 			
 			writer.close();
 			directory.close();

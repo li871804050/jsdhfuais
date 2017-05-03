@@ -311,7 +311,7 @@ public class OntologyAnalyzer {
 					break;
 				}
 			}
-			if (mapRel.containsKey(str)){
+			if (mapRel.containsKey(str) && !mapRel.get(str).contains(strLevels[2])){
 				mapRel.get(str).add(strLevels[2]);
 			} else {
 				List<String> reList = new ArrayList<>();
@@ -336,6 +336,10 @@ public class OntologyAnalyzer {
 	}
 	
 	
+	/**
+	 * 
+	 * @return lable与其中某一属性
+	 */
 	public static String getLabelPro() {
 		HashMap<String, List<String>> mapLevel = OntologyAnalyzer.getLevel();
 		HashMap<String, List<String>> mapLabel = OntologyAnalyzer.getproperty();

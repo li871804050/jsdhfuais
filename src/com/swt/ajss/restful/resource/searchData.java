@@ -449,16 +449,16 @@ public class searchData {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String ConnectedComponent(String Neo4jJson){
 		
-		GraphAlgorithm ga=new GraphAlgorithm();
-		SWGraph sg=GraphInstance.getInstanceOfGraph("connectedcomponent");
-		sg=sg.loadSWGraphFromNeo4jJson(Neo4jJson, null);
-		Queue<Integer>[] result=ga.ConnectedComponent(sg);
-		Result res=new Result();
-		res.setObj(result);
-
-		String str= algorithm.Algorithm.getJSON(res);
-		return str;
-		
+//		GraphAlgorithm ga=new GraphAlgorithm();
+//		SWGraph sg=GraphInstance.getInstanceOfGraph("connectedcomponent");
+//		sg=sg.loadSWGraphFromNeo4jJson(Neo4jJson, null);
+//		Queue<Integer>[] result=ga.ConnectedComponent(sg);
+//		Result res=new Result();
+//		res.setObj(result);
+//
+//		String str= algorithm.Algorithm.getJSON(res);
+//		return str;
+		return "";
 	}
 	
 	/**
@@ -471,14 +471,15 @@ public class searchData {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String ConnectedComponent_Define(String definJson){
 		
-		GraphAlgorithm ga=new GraphAlgorithm();
-		SWGraph sg=algorithm.Algorithm.parseTheDefineGraphJson("connectedcomponent", definJson);
-		Queue<Integer>[] result=ga.ConnectedComponent(sg);
-		Result res=new Result();
-		res.setObj(result);
-
-		String str=algorithm.Algorithm.getJSON(res);
-		return str;
+//		GraphAlgorithm ga=new GraphAlgorithm();
+//		SWGraph sg=algorithm.Algorithm.parseTheDefineGraphJson("connectedcomponent", definJson);
+//		Queue<Integer>[] result=ga.ConnectedComponent(sg);
+//		Result res=new Result();
+//		res.setObj(result);
+//
+//		String str=algorithm.Algorithm.getJSON(res);
+//		return str;
+		return "";
 		
 	}
 	
