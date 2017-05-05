@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 
 import com.shuwei.graph.algorithm.GraphAlgorithm;
 import com.shuwei.graph.inter.SWGraph;
+import com.swt.ajss.restful.service.StartService;
 
 public class Test {
 
@@ -20,21 +21,22 @@ public class Test {
 	 * @throws UnsupportedEncodingException 
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-//		FileReader file = new FileReader("D:\\json.txt");
+//		FileReader file = new FileReader("D://json.txt");
 		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\test.txt"),"UTF-8"));
+	
 		try {
-			String str=reader.readLine();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("E:/360data/重要数据/桌面/化学品/中石化安工院/过氧化物.csv"),"UTF-8"));
+			String line = "";
+			StartService.set();
+			while ((line = reader.readLine()) != null) {
+				String cypher = "match (n:化学品) where n.化学品名称 = '" + line + "' set n:有机过氧化物";
+				System.out.println(StartService.connection.exectCypher(cypher));
+			}
 			
-			Algorithm gl=new Algorithm();
-//			SWGraph sg=gl.parseTheDefineGraphJson("degree-without-arrow",str);
-//			GraphAlgorithm ga=new GraphAlgorithm();
 			
-			
-			System.out.println(gl.TriangleCount_Define(str).toString());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

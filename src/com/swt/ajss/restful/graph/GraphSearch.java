@@ -19,9 +19,9 @@ public class GraphSearch {
 	
 	public static void main(String[] args) {
 		StartService.set();
-		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
-//		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/化工.owl");
-//		getResult("生产");
+//		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
+		getResult("硝酸 氨 27");
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class GraphSearch {
 	public static List<Object> getResult(String wString) {
 		String[] datas = wString.split(" ");
 		List<Map<String, List<String>>> indexRes = new ArrayList<>();
-		List<Integer> countRes = new ArrayList<>();
+		
 		for (String d: datas){
 			Map<String, List<String>> res = IndexResultDeal.dealIndexSearch(GraphIndex.searchIndex(indexPath, d));
 			if (res.size() >0){
@@ -146,6 +146,9 @@ public class GraphSearch {
 		if (cyWhere.matches(".* or ")){
 			cyWhere = cyWhere.substring(0, cyWhere.length() - 3);
 		}
+		if (cyWhere.matches(".*_1.*")){
+			cyWhere = cyWhere.replace("_1", "");
+		}
 		
 		if (!"".equals(cyWhere)){
 			cyWhere = "where " + cyWhere + ")";
@@ -237,11 +240,11 @@ public class GraphSearch {
 			String cypher = "";
 			for (String key: cyMatches.keySet()){				
 				path = path.replace(":"+ key, "n" + cyMatches.get(key) + ":" + key);
-				path = path.replace("_1", "");
+				if (path.contains(key + "_1")){
+					path = path.replace("n" + cyMatches.get(key) + ":" + key + "_1", ":" + key + "_1");
+				}
 			}
-			if (ent.get(1).equals(ent.get(0) + "_1")){
-				path = path.replace("n2n1", "n2");
-			} 
+			path = path.replace("_1", "");			
 			cypher = "match p = " + path + " " + cyWhere + " return p";
 			System.out.println("0:" + cypher);
 			String result = StartService.neo4jHandle.getCypherResult(cypher);
@@ -331,7 +334,7 @@ public class GraphSearch {
 	 */
 	public static String dealRelOnly(List<String> relationShip) {
 		String cypher = "";
-		cypher = "match p = (:" + relationShip.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") return p";
+		cypher = "match p = (:" + relationShip.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") return p limit 200";
 		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){

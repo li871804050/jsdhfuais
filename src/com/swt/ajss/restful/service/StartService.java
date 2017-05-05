@@ -31,7 +31,7 @@ public class StartService {
 	public static Neo4jHandle neo4jHandle = null;
 	public static String dicDir = "dic";
 	public static void main(String[] args) {
-		dicDir = args[0];
+//		dicDir = args[0];
 		System.err.println("添加label");
 //		addLable.startLabel();
 		System.err.println("添加label完成");

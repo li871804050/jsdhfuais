@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
      xml:base="http://www.semanticweb.org/administrator/ontologies/2017/2/untitled-ontology-5"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.semanticweb.org/administrator/ontologies/2017/2/untitled-ontology-5">
     <Prefix name="" IRI="http://www.semanticweb.org/administrator/ontologies/2017/2/untitled-ontology-5"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
@@ -13,718 +23,73 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <DataProperty IRI="#案件属性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#临界压力"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#剂型"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#检察院"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#居民住宅"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#疾病名"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否属于生产装置"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#患者姓名"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#临界温度"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#西药"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#现金"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#交通运输工具"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#企业代码"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#皮肤腐蚀_刺激"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#首饰"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#上午"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#生产企业"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#市场"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#孕妇"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物品类型"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故原因"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#易燃气体"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否装备安全仪表系统"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#结构式"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故板块"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#易燃固体"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#案发部位"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#金属腐蚀物"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#严重眼损伤_眼刺激"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#通用名称"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#少年"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#特异性靶器官毒性_一次接触"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#相对蒸气密度"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#地址"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物品价值"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#重伤人数"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#妇产科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#轻伤人数"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#外科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#易燃液体"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#配伍禁忌"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#同住"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故类型"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#易燃固体_易于自燃的物质_遇水放出易燃气体的物质"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#下午"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#化学品名称"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#联系电话"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#健康危险"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#学生宿舍"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#爆炸物"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#医技科"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#原料"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#手机"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#并发症"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#儿科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#危险源性质"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否完善监控设施"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#其他"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#中年"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#氧化性固体"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#盗窃案"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#邮编"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#信用证诈骗案"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#禁忌人群"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#青年"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#性别"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#易燃液体物质"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#五官科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#人员"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#毒性物质和感染性物质"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#pH值"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#非法经营案"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#杂项危险物质和物品"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#老年人"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#发病部位"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#危险反应"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#公安"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#骨科"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#报案"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#技术开锁"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#事故企业"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#注意事项"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#事故物资"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#稳定性"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#医学影像科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#年龄"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故响应"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#性状"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Ⅱ级"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#精神心理科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#国家_省份"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#企业规模"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#内部单位"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#爆炸品"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#放射性物质"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物品属性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#相对分子质量"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#中午"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#重大危险源"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#其它诈骗"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#部位"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#男科"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#交易"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#化学品英文名"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#老年"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#旅店业"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#危害水生环境_长期危害"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#生产"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#气体"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#用药"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#道路"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#身份证"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#男"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Ⅲ级"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#批准文号"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#特异性靶器官毒性_反复接触"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#用法用量"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#自燃固体"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#拥有"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#案件"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#化学品"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#遇水放出易燃气体的物质和混合物"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#爆炸下限"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#生殖细胞致突变性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#黏度"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#功能主治"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#急性毒性_经口"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#吸入危害"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#腐蚀性物质"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#作案手段"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#入室盗窃"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#成份"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#化工企业"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#翻墙入室"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#商品名称"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#废气处理"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#诊断"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#合医证号"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#熔点"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#自热物质和混合物"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#传染病科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#金融诈骗案"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#沸点"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#通话"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#手机号"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#内科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#早上"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#同行"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#职工人数"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#生殖毒性"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#车"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物品品牌"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#人属性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#爆炸上限"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#化学不稳定性气体"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#电信诈骗"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#疾病"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#省份"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#急性毒性_吸入"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#化工行业"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#营养科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#急性毒性_经皮"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#皮肤性病科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#预防措施"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#患者"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#女"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#身份证号"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#加压气体"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#患者属性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#传染性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#药品属性"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#进口企业"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#紧急情况概述"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#死亡人数"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#成份名"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#药品"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否涉及毒性气体_液化气体_剧毒液体"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#自反应物质和混合物"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#相关症状"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#麻醉医学科"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#姓名"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物理和化学危险"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#企业名称"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#分子式"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#禁忌"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#成立日期"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#氧化性液体"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Ⅰ级"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#所属企业"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#闪点"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#化工行业"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#卡"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#致癌性"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#银行卡号"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#撬门入室"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#单位性质"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#18岁以下患者"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#出生日期"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否在城区内"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#危险级别"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#中医科"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#其他化学物质"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#危害臭氧层"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#燃烧热"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故设备"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#有机过氧化物"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#事故信息"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#物"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#医药"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#溜门入室"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#氧化性气体"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#环境危害"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#是否装备紧急停车系统"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#物品名"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#网络诈骗"/>
     </Declaration>
     <Declaration>
         <Class IRI="#GHS"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#案发时间段"/>
+        <Class IRI="#Ⅰ级"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#危害水生环境_急性危害"/>
+        <Class IRI="#Ⅱ级"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#盗窃电动车"/>
+        <Class IRI="#Ⅲ级"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#涉案物品"/>
+        <Class IRI="#上午"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#呼吸道致敏物"/>
+        <Class IRI="#下午"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#商业场所"/>
+        <Class IRI="#严重眼损伤_眼刺激"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#车上被盗"/>
+        <Class IRI="#中医科"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#危险货物"/>
+        <Class IRI="#中午"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#集资诈骗案"/>
+        <Class IRI="#中年"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#车站码头"/>
+        <Class IRI="#中药"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#编号"/>
+        <Class IRI="#事故信息"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#介入医学科"/>
+        <Class IRI="#五官科"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#分解温度"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#事故装置"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#贷款诈骗案"/>
+        <Class IRI="#交通运输工具"/>
     </Declaration>
     <Declaration>
         <Class IRI="#人"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#异性靶器官毒性_一次接触"/>
+        <Class IRI="#人员"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#禁忌疾病"/>
+        <Class IRI="#介入医学科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#传染病科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#信用证诈骗案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#儿科"/>
     </Declaration>
     <Declaration>
         <Class IRI="#儿童"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#相对密度"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#单日用量"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#皮肤致敏物"/>
+        <Class IRI="#入室盗窃"/>
     </Declaration>
     <Declaration>
         <Class IRI="#公共场所"/>
@@ -733,50 +98,711 @@
         <Class IRI="#公共场所被盗"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#银行卡号"/>
+        <Class IRI="#公安"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其他"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其他化学物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#其它诈骗"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#内科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#内部单位"/>
     </Declaration>
     <Declaration>
         <Class IRI="#凌晨"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#疾病属性"/>
+        <Class IRI="#加压气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学不稳定性气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化学品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工工艺"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#化工行业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医学影像科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医技科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#医药"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#卡"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害水生环境_急性危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害水生环境_长期危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危害臭氧层"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#危险货物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#吸入危害"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#呼吸道致敏物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#商业场所"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#外科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#女"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#妇产科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#孕妇"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#学生宿舍"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#少年"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#居民住宅"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#市场"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#异性靶器官毒性_一次接触"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#急性毒性_吸入"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#急性毒性_经口"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#急性毒性_经皮"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#患者"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#成份"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#手机"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#技术开锁"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#撬门入室"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#放射性物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#旅店业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#早上"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃固体_易于自燃的物质_遇水放出易燃气体的物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃液体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#易燃液体物质"/>
     </Declaration>
     <Declaration>
         <Class IRI="#晚上"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#电话号码"/>
+        <Class IRI="#有机过氧化物"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#事故经过"/>
+        <Class IRI="#杂项危险物质和物品"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#中药"/>
+        <Class IRI="#案件"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#案发时间段"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#案发部位"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#检察院"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#毒性物质和感染性物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性气体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#氧化性液体"/>
     </Declaration>
     <Declaration>
         <Class IRI="#氧化性物质和有机过氧化物"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#肿瘤科"/>
+        <Class IRI="#溜门入室"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#爆炸品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#爆炸物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#特异性靶器官毒性_一次接触"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#特异性靶器官毒性_反复接触"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#现金"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生产企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生殖毒性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#生殖细胞致突变性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#电信诈骗"/>
     </Declaration>
     <Declaration>
         <Class IRI="#电话号码"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#安全存储"/>
+        <Class IRI="#男"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#时间"/>
+        <Class IRI="#男科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#疾病"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#皮肤性病科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#皮肤腐蚀_刺激"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#皮肤致敏物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#盗窃案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#盗窃电动车"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#精神心理科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#网络诈骗"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#翻墙入室"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#老年"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#老年人"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#肿瘤科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#腐蚀性物质"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自反应物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自热物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自燃固体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#自燃液体"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#致癌性"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#药品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#营养科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#西药"/>
     </Declaration>
     <Declaration>
         <Class IRI="#诈骗案"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#贷款诈骗案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#车"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#车上被盗"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#车站码头"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#进口企业"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#遇水放出易燃气体的物质和混合物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#道路"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#重大危险源"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#重点监管危化品"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#金属腐蚀物"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#金融诈骗案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#银行卡号"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#集资诈骗案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#青年"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#非法经营案"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#首饰"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#骨科"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#麻醉医学科"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#事故企业"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#事故物资"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#交易"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#功能主治"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#包含"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#自燃液体"/>
+        <ObjectProperty IRI="#原料"/>
     </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#同住"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#同行"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#并发症"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#所属企业"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#报案"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#拥有"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#涉案物品"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#生产"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#生产工艺"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#用药"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#禁忌"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#禁忌人群"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#禁忌疾病"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#诊断"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#通话"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#配伍禁忌"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pH值"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#临界压力"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#临界温度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故原因"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故响应"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故板块"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故类型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故经过"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故装置"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#事故设备"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#人属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业代码"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#企业规模"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#传染性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#作案手段"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#健康危险"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#出生日期"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分子式"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#分解温度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#剂型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化学品名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化学品英文名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#化工行业"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#单位性质"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#单日用量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险反应"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险源性质"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#危险级别"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#发病部位"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#合医证号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#商品名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#国家_省份"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#地址"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#姓名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#安全存储"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#工艺名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#年龄"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#废气处理"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#性别"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#性状"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#患者姓名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#患者属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#成份名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#成立日期"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#手机号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#批准文号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#时间"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否在城区内"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否完善监控设施"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否属于生产装置"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否涉及毒性气体_液化气体_剧毒液体"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否装备安全仪表系统"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#是否装备紧急停车系统"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#案件属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#死亡人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#沸点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#注意事项"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#熔点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#燃烧热"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#爆炸上限"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#爆炸下限"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品价值"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品品牌"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物品类型"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#物理和化学危险"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#环境危害"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#用法用量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#电话号码"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#疾病名"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#疾病属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相关症状"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对分子质量"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对密度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#相对蒸气密度"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#省份"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#稳定性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#紧急情况概述"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#结构式"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#编号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#职工人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#联系电话"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#药品属性"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#身份证"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#身份证号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#轻伤人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#通用名称"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#邮编"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#部位"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#重伤人数"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#银行卡号"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#闪点"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#预防措施"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#黏度"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#18岁以下患者"/>
+        <Class IRI="#患者"/>
+    </SubClassOf>
     <SubClassOf>
         <Class IRI="#GHS"/>
         <Class IRI="#化学品"/>
@@ -1073,8 +1099,8 @@
     <SubClassOf>
         <Class IRI="#化学品"/>
         <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#原料"/>
-            <Class IRI="#化学品"/>
+            <ObjectProperty IRI="#生产工艺"/>
+            <Class IRI="#化工工艺"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
@@ -1358,6 +1384,24 @@
         <Class IRI="#化工企业"/>
         <DataSomeValuesFrom>
             <DataProperty IRI="#邮编"/>
+            <Datatype abbreviatedIRI="xsd:anyURI"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工工艺"/>
+        <Class IRI="#化工行业"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工工艺"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#原料"/>
+            <Class IRI="#化学品"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#化工工艺"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#工艺名称"/>
             <Datatype abbreviatedIRI="xsd:anyURI"/>
         </DataSomeValuesFrom>
     </SubClassOf>
@@ -2062,6 +2106,10 @@
         </DataSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#重点监管危化品"/>
+        <Class IRI="#化学品"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#金属腐蚀物"/>
         <Class IRI="#GHS"/>
     </SubClassOf>
@@ -2110,10 +2158,6 @@
     <SubClassOf>
         <Class IRI="#麻醉医学科"/>
         <Class IRI="#疾病"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#18岁以下患者"/>
-        <Class IRI="#患者"/>
     </SubClassOf>
     <SubDataPropertyOf>
         <DataProperty IRI="#pH值"/>
@@ -2459,5 +2503,5 @@
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
 

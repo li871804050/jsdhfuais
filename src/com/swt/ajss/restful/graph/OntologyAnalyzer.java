@@ -147,6 +147,10 @@ public class OntologyAnalyzer {
 					array.add(arrayAll.get(la));
 				}
 			}
+			
+			if (relSame.contains("禁忌")){
+				relSame.remove("禁忌");
+			}
 //			writer5.write(array.toJSONString());
 //			writer5.close();
 //
@@ -282,7 +286,7 @@ public class OntologyAnalyzer {
 	 * 
 	 * @return 同类之间存在关系的实体集合
 	 */
-	public static List<String> getRelSame() {
+	public static List<String> getRelSame() {		
 		return relSame;
 		
 	}

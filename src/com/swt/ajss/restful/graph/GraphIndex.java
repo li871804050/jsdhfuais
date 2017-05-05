@@ -60,12 +60,12 @@ public class GraphIndex {
 	public static String indexPath = StartService.dicDir + "/index2";
 	public static void main(String[] args) {
 
-		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/ch.owl");
-//		creatIndex(indexPath, 1);
-		List<String> reStrings = searchIndex(indexPath, "用药");
-		for (int i = 0; i < reStrings.size(); i++){
-			System.out.println(reStrings.get(i));
-		}
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
+		creatIndex(indexPath, 1);
+//		List<String> reStrings = searchIndex(indexPath, "用药");
+//		for (int i = 0; i < reStrings.size(); i++){
+//			System.out.println(reStrings.get(i));
+//		}
 	}
 	
 	
@@ -277,7 +277,7 @@ public class GraphIndex {
             ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
           
             for (int i = 0; i < sd.length; i++) {  
-            	if (sd[i].score > 1.0){
+            	if (sd[i].score > 6.0){
 	                Document hitDoc = reader.document(sd[i].doc);
 	                String en = hitDoc.get(KEYFIELD_1);
 	                String pN = hitDoc.get(KEYFIELD_2);

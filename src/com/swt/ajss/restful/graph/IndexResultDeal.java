@@ -40,13 +40,16 @@ public class IndexResultDeal {
 		while (true){
 			int num = data.size() - 1;
 			Map<String, List<List<String>>> reStrings = new HashMap<>();
+			List<String> listEnt = new ArrayList<>();
 			for (int j = 0; j < countData.size(); j++){
-				if (reStrings.containsKey(keys.get(j).get(countData.get(j)))){
-					reStrings.get(keys.get(j).get(countData.get(j))).add(data.get(j).get(keys.get(j).get(countData.get(j))));
-				} else{
-					List<List<String>> list = new ArrayList<>();
-					list.add(data.get(j).get(keys.get(j).get(countData.get(j))));
+				List<List<String>> list = new ArrayList<>();
+				list.add(data.get(j).get(keys.get(j).get(countData.get(j))));
+				String ent = keys.get(j).get(countData.get(j)).split(GraphIndex.LINK_1)[0];
+				if (listEnt.contains(ent)){
+					reStrings.put(keys.get(j).get(countData.get(j)).replace(ent, ent + "_1"), list);
+				}else {
 					reStrings.put(keys.get(j).get(countData.get(j)), list);
+					listEnt.add(ent);
 				}
 			}
 			arrangement.add(reStrings);
