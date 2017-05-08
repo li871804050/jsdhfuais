@@ -1,11 +1,11 @@
 package com.swt.ajss.restful.graph;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.jdom2.Document;
@@ -13,10 +13,10 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.XMLOutputter;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.swt.ajss.restful.service.owlTest;
 
 /**
  * 
@@ -87,13 +87,20 @@ public class OntologyAnalyzer {
 					relation.add(relFirst + "-" + entrity + "-" + relName);
 					if (relFirst.equals(entrity)){
 						relSame.add(relName);
-					}
+					}					
 				} catch (NullPointerException e3) {
 //					System.out.println(e.getChild("Class", ns).getAttributeValue("IRI").replace("#", ""));
 					// TODO: handle exception
 				}
 			}
 			
+			List<Element> symmetrics = root.getChildren("SymmetricObjectProperty", ns);
+
+			for (Element symmetric: symmetrics){
+				String  relName = symmetric.getChild("ObjectProperty", ns).getAttributeValue("IRI").replace("#", "");
+				relSame.remove(relName);
+			}
+		
 			boolean child = true;
 			List<String> keyAll = new ArrayList<>();
 			List<String> allPro = new ArrayList<>();
@@ -146,10 +153,6 @@ public class OntologyAnalyzer {
 				if (!allPro.contains(la)) {
 					array.add(arrayAll.get(la));
 				}
-			}
-			
-			if (relSame.contains("禁忌")){
-				relSame.remove("禁忌");
 			}
 //			writer5.write(array.toJSONString());
 //			writer5.close();
@@ -382,4 +385,55 @@ public class OntologyAnalyzer {
 		return object.toJSONString();
 	}
 	
+	/**
+	 * 
+	 * @param ent1 实体1
+	 * @param ent2 实体2
+	 * @param rel 关系
+	 * @param filePath 本体路径
+	 */
+	public static void addRelOnt(String ent1, String ent2, String rel, String filePath) {
+		try {
+			SAXBuilder builder = new SAXBuilder();//实例JDOM解析器  
+	        Document document = builder.build(filePath);
+			Element root = document.getRootElement();
+			HashMap<String, List<String>> levelCopy = new HashMap<>();
+			Namespace ns = Namespace.getNamespace("http://www.w3.org/2002/07/owl#");
+			
+			Element EntRel = new Element("SubClassOf");
+			EntRel.setNamespace(ns);
+			Element cla = new Element("Class") ;
+			cla.setNamespace(ns);
+			
+			cla.setAttribute("IRI", "#" + ent1);
+			EntRel.addContent(cla);
+			Element obSoValue = new Element("ObjectSomeValuesFrom");
+			obSoValue.setNamespace(ns);
+			
+			Element obPro = new Element("ObjectProperty");
+			obPro.setNamespace(ns);
+			
+			obPro.setAttribute("IRI", "#" + rel);
+			Element cla2 = new Element("Class") ;
+			cla2.setNamespace(ns);
+			
+			cla2.setAttribute("IRI", "#" + ent2);
+			
+			obSoValue.addContent(obPro);
+			obSoValue.addContent(cla2);
+			EntRel.addContent(obSoValue);			
+//			root.setNamespace(ns);
+			int k = root.getContentSize();
+		    
+			root.addContent(k, EntRel);
+			XMLOutputter XMLOut = new XMLOutputter(); 
+			XMLOut.output(document, new FileOutputStream(filePath));	
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

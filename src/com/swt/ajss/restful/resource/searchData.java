@@ -29,6 +29,9 @@ import com.swt.ajss.restful.algorthm.Result;
 import com.swt.ajss.restful.graph.GraphData;
 import com.swt.ajss.restful.graph.GraphSearch;
 import com.swt.ajss.restful.graph.OntologyAnalyzer;
+import com.swt.ajss.restful.service.StartService;
+
+import esclient.Tupu;
 
 @Path("/query")
 public class searchData {
@@ -341,7 +344,43 @@ public class searchData {
 		return object.toJSONString();
 		
 	}
+	
+	@POST
+	@Path("/es")
+//	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)	
+	public String esData(String es){
+		System.out.println("es!");
+		JSONObject object = JSONObject.parseObject(es);
+		
+		String index = object.getString("index");
+		String fString = object.getString("fields").replace("\"", "");
+		String[] fields = fString.substring(1, fString.length() - 1).split(",");
+		String vString = object.getString("values").replace("\"", "");
+		String[] values = vString.substring(1,  vString.length() - 1).split(",");
+		net.sf.json.JSONArray array = Tupu.searchGraph(index, fields, values);
+		return ananlyzerESData.anaES(array.toString());		
+	}
 
+	@POST
+	@Path("/add/rel")
+//	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)	
+	public String addRel(String EntRel){
+		System.out.println("rel!");
+		
+		JSONObject object = JSONObject.parseObject(EntRel);
+		String ent1 = object.getString("ent1");
+		String rel = object.getString("rel");
+		String ent2 = object.getString("ent2");
+		OntologyAnalyzer.addRelOnt(ent1, ent2, rel, StartService.dicDir + "/" + StartService.owlName);
+		return "添加完成！";
+	}
+
+	
+	
 	@POST
 	@Path("/yiyao/yongyao")
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -441,7 +480,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("cc")
@@ -463,7 +502,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("cc_define")
@@ -486,7 +525,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("pagerank")
@@ -513,7 +552,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("pagerank_define")
@@ -539,7 +578,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("trianglecount")
@@ -574,7 +613,7 @@ public class searchData {
 	
 	/**
 	 * 
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("trianglecount_define")
@@ -636,8 +675,8 @@ public class searchData {
 	
 	
 	/**
-	 * ����ͼ���
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 有向图入度
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("indegree")
@@ -707,8 +746,8 @@ public class searchData {
 	}
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 有向图出度
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("outdegree")
@@ -742,8 +781,8 @@ public class searchData {
 	
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 无向图度数
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("outdegree_define")
@@ -775,8 +814,8 @@ public class searchData {
 	}
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 无向图度数
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("degree")
@@ -810,8 +849,8 @@ public class searchData {
 	}
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 无向图度数
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("degree_define")
@@ -845,8 +884,8 @@ public class searchData {
 	
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 最短路径
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("shortestpath_define")
@@ -880,8 +919,8 @@ public class searchData {
 	
 	
 	/**
-	 * ����ͼ����
-	 * @param Neo4jJson  neo4j��ѯ���graph��ʽ
+	 * 无向图度数
+	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
 	@Path("computeModularity_define")

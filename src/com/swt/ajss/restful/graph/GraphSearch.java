@@ -21,7 +21,7 @@ public class GraphSearch {
 		StartService.set();
 //		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
-		getResult("硝酸 氨 27");
+		getResult("李兰清 王梓怡");
 	}
 	
 	/**
@@ -170,7 +170,18 @@ public class GraphSearch {
 			List<String> results = dealMoreEnt(ent, cyMatches, cyWhere);
 			if (results.size() > 0){
 				data.addAll(results);
-			}			
+			}else {
+				String result = "";
+				if (ent.size() == 2){
+					result = getShortPathTwo(ent, cyWhere);
+				}
+				if (!"".equals(result)){
+					data.add(result);
+				}else {
+					result = getNodes(ent, cyMatches, cyWhere);
+					data.add(result);
+				}
+			}
 		}else if (ent.size() == 1 && relationShip.size() == 0){//处理只有一个实体的查询
 			String result = dealEntOne(ent, cyWhere);
 			if (!"".equals(result)){
@@ -225,6 +236,30 @@ public class GraphSearch {
 	}
 	
 	
+	public static String getNodes(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
+		String cypher = "match ";
+		String ret = "return ";
+		String result = "";
+		StartService.set();
+		for (int i = 0; i < ent.size() - 1; i++){
+			cypher = cypher + "(n" + cyMatches.get(ent.get(i)) + ":" + ent.get(i) + "),";
+			ret = ret + "n" + cyMatches.get(ent.get(i)) + ",";
+		}
+		cypher = cypher + "(n" + cyMatches.get(ent.get(ent.size() - 1)) + ":" + ent.get(ent.size() - 1) + ") ";
+		ret = ret + "n" + cyMatches.get(ent.get(ent.size() - 1));
+		cypher = cypher + cyWhere + ret;
+		for (int i = 1; i <= ent.size(); i++){
+			cypher = cypher.replace("_" + i, "");
+		}
+		System.out.println("-1:" + cypher);
+		result = StartService.neo4jHandle.getCypherResult(cypher);
+		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+			return result;
+		}
+		// TODO 自动生成的方法存根
+		return result;
+	}
+
 	/**
 	 * 多个实体之间的查询
 	 * @param ent	出现的实体
@@ -350,6 +385,7 @@ public class GraphSearch {
 	public static String getShortPathTwo(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
+		cypher = cypher.replace("_1", "");
 		StartService.set();
 		String result = StartService.neo4jHandle.getCypherResult(cypher);
 		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){

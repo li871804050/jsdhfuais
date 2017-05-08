@@ -8,9 +8,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.shuwei.graph.algorithm.GraphAlgorithm;
 import com.shuwei.graph.inter.SWGraph;
+import com.shuwei.graph.util.GraphInstance;
+import com.swt.ajss.restful.algorthm.Result;
+
+import net.sf.json.JSONArray;
 
 public class Test {
 
@@ -20,29 +27,26 @@ public class Test {
 	 * @throws UnsupportedEncodingException 
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) {
 		
-//		FileReader file = new FileReader("D:\\json.txt");
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\test.txt"),"UTF-8"));
-		try {
-			String str=reader.readLine();
-			
-			Algorithm gl=new Algorithm();
-//			SWGraph sg=gl.parseTheDefineGraphJson("degree-without-arrow",str);
-//			GraphAlgorithm ga=new GraphAlgorithm();
-			
-			
-			System.out.println(gl.TriangleCount_Define(str).toString());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
-		
-
+		Neo4jHandle neo4jHandle = new Neo4jHandle("neo4j", "123456", "192.168.0.171", "7474");
+		String strCypher = "match p = (n2:化学品)-[:原料]-(n1:化工工艺) where n2.化学品名称 = '硝酸铵' return p";
+		String strNeo4jResult = neo4jHandle.getCypherResult(strCypher);
+		System.out.println(strNeo4jResult);
+//		GraphAlgorithm ga=new GraphAlgorithm();
+//		SWGraph sg=GraphInstance.getInstanceOfGraph("pagerank");
+//		sg=sg.loadSWGraphFromNeo4jJson(strNeo4jResult, null);
+//		Map<String, Double> result=ga.PageRank(sg,null,null,null);
+//		
+//		List<Entry<String, Double>> info = Algorithm.sortDESC_Double(result);
+//		
+//		
+//		Result res=new Result();
+//		res.setObj(info);
+//
+//		String str=JSONArray.fromObject(res).toString();
+//		System.out.println(str);
+	
 	}
 
 }

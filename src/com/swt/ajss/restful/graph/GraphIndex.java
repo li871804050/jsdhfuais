@@ -275,9 +275,12 @@ public class GraphIndex {
             BooleanClause clause2 = new BooleanClause(query1, Occur.MUST);
             BooleanQuery query = new BooleanQuery.Builder().add(clause2).build();
             ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
-          
+            float score = 5.0f;
+//            if (sd.length >= 2){
+//            	score = sd[1].score;
+//            }
             for (int i = 0; i < sd.length; i++) {  
-            	if (sd[i].score > 6.0){
+            	if (sd[i].score >= score){
 	                Document hitDoc = reader.document(sd[i].doc);
 	                String en = hitDoc.get(KEYFIELD_1);
 	                String pN = hitDoc.get(KEYFIELD_2);

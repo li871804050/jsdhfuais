@@ -167,6 +167,13 @@ public class GraphData {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param id	节点id
+	 * @param rel	关系类型
+	 * @return		节点的该类型的关系数据
+	 */
 	public static String getRelAll(String id, String rel) {
 		String cypher = "start n = node(" + id + ") match p = (n)-[r:" + rel + "]-(m) return p";
 		StartService.set();
@@ -175,6 +182,15 @@ public class GraphData {
 //		String[] datas = data.split(",");
 //		
 		return result;		
+	}
+	
+	/**
+	 * 基于规则的关系补全（推理）
+	 * @param condition	每个关系一条记录，组成的数组
+	 * @param addRel	需要补齐的关系
+	 */
+	public static void reasoning(String conditions, String addRel) {
+		
 	}
 	
 }

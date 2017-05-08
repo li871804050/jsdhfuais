@@ -30,15 +30,18 @@ public class StartService {
 	public static Neo4jConnection connection = null;
 	public static Neo4jHandle neo4jHandle = null;
 	public static String dicDir = "dic";
+	public static String owlName = "20140427.owl";
 	public static void main(String[] args) {
-//		dicDir = args[0];
+		dicDir = args[0];
+		owlName = args[1];
 		System.err.println("添加label");
 //		addLable.startLabel();
 		System.err.println("添加label完成");
 		System.err.println("本体解析");
-		owlTest.deal(dicDir + "/20140427.owl");
+//		owlTest.deal(dicDir + "/20140427.owl");
 //		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/" + args[1]);
-		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/20140427.owl");
+//		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/20140427.owl");
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer(dicDir + "/" + owlName);
 		System.err.println("本体解析完成");
 		System.err.println("索引创建");
 		GraphIndex.creatIndex(dicDir + "/index2", 1);

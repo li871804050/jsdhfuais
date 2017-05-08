@@ -46,7 +46,7 @@ public class IndexResultDeal {
 				list.add(data.get(j).get(keys.get(j).get(countData.get(j))));
 				String ent = keys.get(j).get(countData.get(j)).split(GraphIndex.LINK_1)[0];
 				if (listEnt.contains(ent)){
-					reStrings.put(keys.get(j).get(countData.get(j)).replace(ent, ent + "_1"), list);
+					reStrings.put(keys.get(j).get(countData.get(j)).replace(ent + "####", ent + "_1####"), list);
 				}else {
 					reStrings.put(keys.get(j).get(countData.get(j)), list);
 					listEnt.add(ent);
