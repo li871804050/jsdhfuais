@@ -25,7 +25,7 @@ public class GraphSearch {
 		StartService.set();
 //		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
-		getResult("头痛 发热 感冒");
+		getResult("4-氯-2-硝基苯胺");
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class GraphSearch {
 	/*
 	 * 对搜索结果进行组合在Neo4j中进行查询
 	 */
-	public static List<String> useSearch(Map<String, List<List<String>>>  res) {
+	private static List<String> useSearch(Map<String, List<List<String>>>  res) {
 		StartService.set();
 		List<String> data = new ArrayList<>();
 		List<String> ent = new ArrayList<>();
@@ -185,7 +185,7 @@ public class GraphSearch {
 				int lenEnt = ent.size() - 1;
 				for (int i = 0; i <= lenEnt; i++){
 					if (ent.get(i).matches(".*" + lenEnt)){
-						result = getNodesLineOne(ent, cyMatches, cyWhere);
+						result = getNodesLineOne(ent, cyMatches, cyWhere);	//处理多个同类节点
 						break;
 					}
 				}
@@ -258,14 +258,20 @@ public class GraphSearch {
 		String cypher = "match ";
 		String ret = "return ";
 		String result = "";
+		String where = "";
 		StartService.set();
 		for (int i = 0; i < ent.size() - 1; i++){
-			cypher = cypher + "(n" + cyMatches.get(ent.get(i)) + ":" + ent.get(i) + ")-[]-(m),";
-			ret = ret + "n" + cyMatches.get(ent.get(i)) + ",";
+			int n = cyMatches.get(ent.get(i));
+			cypher = cypher + "(n" + n + ":" + ent.get(i) + ")-[r" + n + "]-(m),";
+			ret = ret + "n" + n + ",r" + n + ",";
+			where = where + "type(r" + n + ") = type($) and ";
 		}
-		cypher = cypher + "(n" + cyMatches.get(ent.get(ent.size() - 1)) + ":" + ent.get(ent.size() - 1) + ")-[]-(m) ";
-		ret = ret + "n" + cyMatches.get(ent.get(ent.size() - 1)) + ", m";
-		cypher = cypher + cyWhere + ret;
+		int n = cyMatches.get(ent.get(ent.size() - 1));
+		where = where.replace("$", "r" + n);
+		where = where.substring(0, where.length() - 4);
+		cypher = cypher + "(n" + n + ":" + ent.get(ent.size() - 1) + ")-[r" + n + "]-(m) ";
+		ret = ret + "n" + n + ",r" + n + ", m";
+		cypher = cypher + cyWhere + " and " + where +  ret;
 		for (int i = 1; i <= ent.size(); i++){
 			cypher = cypher.replace("_" + i, "");
 		}
@@ -275,7 +281,7 @@ public class GraphSearch {
 			return result;
 		}
 		// TODO 自动生成的方法存根
-		return result;
+		return "";
 	}
 
 	/**
@@ -285,7 +291,7 @@ public class GraphSearch {
 	 * @param cyWhere
 	 * @return 多节点查找
 	 */
-	public static String getNodes(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
+	private static String getNodes(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
 		String cypher = "match ";
 		String ret = " return ";
 		String result = "";
@@ -306,7 +312,7 @@ public class GraphSearch {
 			return result;
 		}
 		// TODO 自动生成的方法存根
-		return result;
+		return "";
 	}
 
 	/**
@@ -316,7 +322,7 @@ public class GraphSearch {
 	 * @param cyWhere	where条件
 	 * @return 查询结果
 	 */
-	public static List<String> dealMoreEnt(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
+	private static List<String> dealMoreEnt(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
 		List<String> paths = GraphPath.getPathRelation(ent);//计算实体的路径		
 		List<String> reStrings = new ArrayList<>();
 		StartService.set();
@@ -348,7 +354,7 @@ public class GraphSearch {
 	 * @param cyWhere where限制条件
 	 * @return 查询结果
 	 */
-	public static String dealEntOne(List<String> ent, String cyWhere) {
+	private static String dealEntOne(List<String> ent, String cyWhere) {
 		String cypher = "";			
 		cypher = "match (n1:" + ent.get(0) + ") " + cyWhere + " return n1";
 		System.out.println("1:" + cypher);
@@ -372,7 +378,7 @@ public class GraphSearch {
 	 * @param relationShip
 	 * @return
 	 */
-	public static String dealRelEnt(List<String> ent, String cyWhere, List<String> relationShip) {
+	private static String dealRelEnt(List<String> ent, String cyWhere, List<String> relationShip) {
 		String cypher = "";
 		StartService.set();
 		if (ent.get(0).equals(relationShip.get(0))){
@@ -416,7 +422,7 @@ public class GraphSearch {
 	/*
 	 * 只查询关系
 	 */
-	public static String dealRelOnly(List<String> relationShip) {
+	private static String dealRelOnly(List<String> relationShip) {
 		String cypher = "";
 		cypher = "match p = (:" + relationShip.get(0) + ")-[r:"+ relationShip.get(2) + "]-(:" + relationShip.get(1)+ ") return p limit 200";
 		StartService.set();
@@ -431,7 +437,7 @@ public class GraphSearch {
 	/*
 	 * 两类实体之间最短路径
 	 */
-	public static String getShortPathTwo(List<String> ent, String cyWhere) {
+	private static String getShortPathTwo(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
 		cypher = cypher.replace("_1", "");
@@ -447,7 +453,7 @@ public class GraphSearch {
 	/*
 	 * 两类实体之间所有路径（3次以内）
 	 */
-	public static String getPathAll(List<String> ent, String cyWhere) {
+	private static String getPathAll(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..3]-(n2:" + ent.get(1) + ")) " + cyWhere + " return p";
 		StartService.set();
@@ -462,7 +468,7 @@ public class GraphSearch {
 	/*
 	 * 同类实体之间最短路径
 	 */
-	public static String getShortPathOne(List<String> ent, String cyWhere) {
+	private static String getShortPathOne(List<String> ent, String cyWhere) {
 		String cypher = "";
 		cypher = "match p =  shortestPath((n1:" + ent.get(0) + ")-[*1..5]-(n2:" + ent.get(0) + "))" + cyWhere + " return p";
 		StartService.set();
@@ -478,7 +484,7 @@ public class GraphSearch {
 	/*
 	 * 两实体和关系
 	 */
-	public static String dealRelEntTwo(List<String> relationShip, List<String> ent, String cyWhere, Map<String, Integer> cyMatches) {
+	private static String dealRelEntTwo(List<String> relationShip, List<String> ent, String cyWhere, Map<String, Integer> cyMatches) {
 		// TODO Auto-generated method stub
 		StartService.set();
 		String cypher = "";

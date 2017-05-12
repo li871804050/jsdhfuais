@@ -61,11 +61,11 @@ public class GraphIndex {
 	public static void main(String[] args) {
 
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
-		creatIndex(indexPath, 1);
-//		List<String> reStrings = searchIndex(indexPath, "用药");
-//		for (int i = 0; i < reStrings.size(); i++){
-//			System.out.println(reStrings.get(i));
-//		}
+//		creatIndex(indexPath, 1);
+		List<String> reStrings = searchIndex(indexPath, "4-氯-2-硝基苯胺");
+		for (int i = 0; i < reStrings.size(); i++){
+			System.out.println(reStrings.get(i));
+		}
 	}
 	
 	
@@ -268,17 +268,17 @@ public class GraphIndex {
             searcher.setSimilarity(similarity);
             Analyzer analyzer = new HanLPAnalyzer();
 //            QueryBuilder builder = new QueryBuilder(analyzer);
-////            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
+//            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
 //            Query query = builder.createPhraseQuery(KEYFIELD_3, keyWord);
             QueryBuilder builder = new QueryBuilder(analyzer);
             Query query1 = builder.createBooleanQuery(KEYFIELD_3, keyWord);
             BooleanClause clause2 = new BooleanClause(query1, Occur.MUST);
             BooleanQuery query = new BooleanQuery.Builder().add(clause2).build();
             ScoreDoc[] sd = searcher.search(query, 100).scoreDocs;
-            float score = 5.0f;
-//            if (sd.length >= 2){
-//            	score = sd[1].score;
-//            }
+            float score = 4.5f;
+            if (sd.length >= 2){
+            	score = sd[0].score;
+            }
             for (int i = 0; i < sd.length; i++) {  
             	if (sd[i].score >= score){
 	                Document hitDoc = reader.document(sd[i].doc);
