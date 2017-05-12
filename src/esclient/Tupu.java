@@ -88,9 +88,7 @@ public class Tupu {
 			for (int i = 0; i < bb.length; i++) {
 				Map<String, Object> dd = bb[i].getSource();
 				String rr = dd.get(fields[1])+","+dd.get(fields[2]);
-				if(list.contains(rr)){
-
-				}else{
+				if(!list.contains(rr)){
 					list.add(rr);
 					//   System.out.println(dd.get(fields[1])+","+dd.get(fields[2]));
 

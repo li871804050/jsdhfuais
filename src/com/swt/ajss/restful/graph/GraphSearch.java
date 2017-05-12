@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
+import com.swt.ajss.restful.resource.ananlyzerESData;
 import com.swt.ajss.restful.service.StartService;
+
+import esclient.Tupu;
 
 /**
  * 
@@ -21,7 +25,7 @@ public class GraphSearch {
 		StartService.set();
 //		System.out.println(StartService.neo4jHandle.getCypherResult("MATCH ()-[r:`子公司`]->(m)-[:生产]-(n) RETURN  m,n limit 5"));
 		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
-		getResult("李兰清 王梓怡");
+		getResult("头痛 发热 感冒");
 	}
 	
 	/**
@@ -50,7 +54,12 @@ public class GraphSearch {
 //				System.err.println(reString.get(0));
 				resData.addAll(reString);
 			}
-		}		
+		}
+		
+//		String es = "[{\"ent1\":{\"field\":\"车次\",\"term\":\"D3068\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D3068\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D3068\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"车次\",\"term\":\"D5242\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D5242\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D5242\"},\"rel\":{\"count\":4}}]";
+//		resData.clear();
+//		resData.add(ananlyzerESData.anaES(es));	
+		
 		List<Map<String, String>> listMap = new ArrayList<>();
     	Map<String, String> m = new HashMap<>();
     	listMap.add(m);
@@ -146,10 +155,11 @@ public class GraphSearch {
 		if (cyWhere.matches(".* or ")){
 			cyWhere = cyWhere.substring(0, cyWhere.length() - 3);
 		}
-		if (cyWhere.matches(".*_1.*")){
-			cyWhere = cyWhere.replace("_1", "");
+		for (int i = 0; i < ent.size(); i++){
+			if (cyWhere.matches(".*_" + i + ".*")){
+				cyWhere = cyWhere.replace("_" + i, "");
+			}
 		}
-		
 		if (!"".equals(cyWhere)){
 			cyWhere = "where " + cyWhere + ")";
 		}
@@ -172,7 +182,16 @@ public class GraphSearch {
 				data.addAll(results);
 			}else {
 				String result = "";
-				if (ent.size() == 2){
+				int lenEnt = ent.size() - 1;
+				for (int i = 0; i <= lenEnt; i++){
+					if (ent.get(i).matches(".*" + lenEnt)){
+						result = getNodesLineOne(ent, cyMatches, cyWhere);
+						break;
+					}
+				}
+				if (!"".equals(result)){
+					data.add(result);
+				}else if (ent.size() == 2){
 					result = getShortPathTwo(ent, cyWhere);
 				}
 				if (!"".equals(result)){
@@ -235,10 +254,40 @@ public class GraphSearch {
 		return data;
 	}
 	
-	
-	public static String getNodes(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
+	private static String getNodesLineOne(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
 		String cypher = "match ";
 		String ret = "return ";
+		String result = "";
+		StartService.set();
+		for (int i = 0; i < ent.size() - 1; i++){
+			cypher = cypher + "(n" + cyMatches.get(ent.get(i)) + ":" + ent.get(i) + ")-[]-(m),";
+			ret = ret + "n" + cyMatches.get(ent.get(i)) + ",";
+		}
+		cypher = cypher + "(n" + cyMatches.get(ent.get(ent.size() - 1)) + ":" + ent.get(ent.size() - 1) + ")-[]-(m) ";
+		ret = ret + "n" + cyMatches.get(ent.get(ent.size() - 1)) + ", m";
+		cypher = cypher + cyWhere + ret;
+		for (int i = 1; i <= ent.size(); i++){
+			cypher = cypher.replace("_" + i, "");
+		}
+		System.out.println("-2:" + cypher);
+		result = StartService.neo4jHandle.getCypherResult(cypher);
+		if (result.contains("\"graph\"") && result.contains("\"nodes\"")){
+			return result;
+		}
+		// TODO 自动生成的方法存根
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param ent
+	 * @param cyMatches
+	 * @param cyWhere
+	 * @return 多节点查找
+	 */
+	public static String getNodes(List<String> ent, Map<String, Integer> cyMatches, String cyWhere) {
+		String cypher = "match ";
+		String ret = " return ";
 		String result = "";
 		StartService.set();
 		for (int i = 0; i < ent.size() - 1; i++){

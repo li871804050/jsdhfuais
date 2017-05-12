@@ -45,11 +45,23 @@ public class IndexResultDeal {
 				List<List<String>> list = new ArrayList<>();
 				list.add(data.get(j).get(keys.get(j).get(countData.get(j))));
 				String ent = keys.get(j).get(countData.get(j)).split(GraphIndex.LINK_1)[0];
-				if (listEnt.contains(ent)){
-					reStrings.put(keys.get(j).get(countData.get(j)).replace(ent + "####", ent + "_1####"), list);
-				}else {
-					reStrings.put(keys.get(j).get(countData.get(j)), list);
-					listEnt.add(ent);
+				String ent2 = ent;
+				int count = 0;
+				while (true){
+					if (listEnt.contains(ent2)){
+						count = count + 1;
+						ent2 = ent + "_" + count;
+						
+					}else {
+						if (count == 0){
+							reStrings.put(keys.get(j).get(countData.get(j)), list);
+							listEnt.add(ent);
+						}else {
+							reStrings.put(keys.get(j).get(countData.get(j)).replace(ent + "####", ent2 + "####"), list);
+							listEnt.add(ent2);
+						}
+						break;
+					}
 				}
 			}
 			arrangement.add(reStrings);

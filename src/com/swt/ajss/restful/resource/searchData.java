@@ -79,41 +79,7 @@ public class searchData {
 		return con;
 	}
 	
-//	@POST
-//	@Path("/anjian")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String getMessage(String casetype){
-//	
-//		System.out.println("搜索!");
-////		JSONObject paramJSON = JSON.parseObject(dataStr);
-////		System.err.println("搜索!");
-////		System.out.println(paramJSON.toString());
-//		//搜索结果
-//		JSONObject paramJSON = JSON.parseObject(casetype);
-//		casetype = paramJSON.getString("casetype");
-//		casetype = casetype.replace("'", "");
-//		List<Object> result = creatIndexFromNeo4j.search(casetype);
-//		
-//		//在这里把结果加入到JSON
-//		JSONObject json = new JSONObject();
-//		if (result.size() == 3) {
-//			System.out.println(result.get(0));
-//			json.put("left", result.get(0));
-//			Map<String, String> map1 = (Map<String, String>) result.get(1);
-//			Map<String, String> map2 = (Map<String, String>) result.get(2);
-//			JSONArray array = new JSONArray();
-//			for (String key : map1.keySet()) {
-//				JSONObject object = new JSONObject();
-//				object.put("num", map1.get(key));
-//				object.put("cypher", map2.get(key));
-//				object.put("label", key);
-//				array.add(object);
-//			}
-//			json.put("right", array);
-//		}
-//		return json.toString();
-//	}
+
 
 	@POST
 	@Path("/anjian")
@@ -124,7 +90,7 @@ public class searchData {
 		System.out.println("搜索!");
 //		JSONObject paramJSON = JSON.parseObject(dataStr);
 //		System.err.println("搜索!");
-//		System.out.println(paramJSON.toString());
+		System.out.println(casetype);
 		//搜索结果
 		JSONObject paramJSON = JSON.parseObject(casetype);
 		casetype = paramJSON.getString("casetype");
@@ -151,6 +117,56 @@ public class searchData {
 		return json.toString();
 	}
 
+	
+	@POST
+	@Path("/reasoning")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addRelation(String conditions){
+	
+		System.out.println("推理!");
+
+		GraphData.reasoning(conditions);;
+	}
+	
+	
+	@POST
+	@Path("/delete/nodes")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public int deleteNodes(String labels){
+	
+		System.out.println("删除一类实体节点!");
+		JSONObject object = JSONObject.parseObject(labels);
+		
+		return GraphData.deleteNodes(object.getString("label"));
+	}
+	
+	@POST
+	@Path("/delete/node")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public int deleteNode(String id){
+	
+		System.out.println("删除一个节点!");
+		JSONObject object = JSONObject.parseObject(id);
+		
+		return GraphData.deleteNode(object.getString("id"));
+	}
+	
+	
+	@POST
+	@Path("/delete/rel")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public int deleteRel(String rel){
+	
+		System.out.println("删除关系!");
+		JSONObject object = JSONObject.parseObject(rel);
+		
+		return GraphData.deleteRels(object.getString("rel"));
+	}
+	
 	@POST
 	@Path("/map")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -551,7 +567,7 @@ public class searchData {
 	
 	
 	/**
-	 * 
+	 * 重要点分析
 	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
@@ -577,7 +593,7 @@ public class searchData {
 	
 	
 	/**
-	 * 
+	 * 稳定点分析
 	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
@@ -612,7 +628,7 @@ public class searchData {
 	}
 	
 	/**
-	 * 
+	 * 稳定点分析
 	 * @param Neo4jJson  neo4j查询结果graph格式
 	 */
 	@POST
@@ -645,6 +661,12 @@ public class searchData {
 		
 	}
 	
+	
+	/**
+	 * 出度入度统计
+	 * @param define
+	 * @return
+	 */
 	@POST
 	@Path("degree_Define01")
 	@Produces("application/json")

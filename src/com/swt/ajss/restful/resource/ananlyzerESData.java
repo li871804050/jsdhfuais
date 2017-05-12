@@ -32,6 +32,7 @@ public class ananlyzerESData {
 			if (!map.containsKey(ent1.getString("field") + "-" + ent1.getString("term"))){
 				id = id - 1;
 				node1 = esDataToNode(ent1, id);
+				map.put(ent1.getString("field") + "-" + ent1.getString("term"), id);
 			}else {
 				node1 = esDataToNode(ent1, map.get(ent1.getString("field") + "-" + ent1.getString("term")));
 			}
@@ -39,6 +40,7 @@ public class ananlyzerESData {
 			if (!map.containsKey(ent2.getString("field") + "-" + ent2.getString("term"))){
 				id = id - 1;
 				node2 = esDataToNode(ent2, id);
+				map.put(ent2.getString("field") + "-" + ent2.getString("term"), id);
 			}else {
 				node2 = esDataToNode(ent2, map.get(ent2.getString("field") + "-" + ent2.getString("term")));
 			}
@@ -52,10 +54,12 @@ public class ananlyzerESData {
 			rel2.put("properties", object);
 			rel2.put("startNode", map.get(ent1.getString("field") + "-" + ent1.getString("term")));
 			rel2.put("endNode", map.get(ent2.getString("field") + "-" + ent2.getString("term")));
+			JSONArray array2 = new JSONArray();
+			array2.add(rel2);
 			nodes.add(node1);
 			nodes.add(node2);
 			datas.put("nodes", nodes);
-			datas.put("relationships", rel2);
+			datas.put("relationships", array2);
 			datas2.put("graph", datas);
 			graphs.add(datas2);
 		}
@@ -79,7 +83,7 @@ public class ananlyzerESData {
 		array.add(ent.get("field"));
 		node .put("labels", array);
 		JSONObject object2 = new JSONObject();
-		object2.put("term", node.getString("term"));
+		object2.put("term", ent.getString("term"));
 		node.put("properties", object2);
 		return node;
 	}

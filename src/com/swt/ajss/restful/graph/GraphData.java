@@ -186,11 +186,102 @@ public class GraphData {
 	
 	/**
 	 * 基于规则的关系补全（推理）
-	 * @param condition	每个关系一条记录，组成的数组
-	 * @param addRel	需要补齐的关系
+	 * @param conditions	每个关系一条记录，组成的数组
+	 * 
 	 */
-	public static void reasoning(String conditions, String addRel) {
+	public static void reasoning(String conditions) {
+		StartService.set();
+		JSONObject jsonAll = JSONObject.parseObject(conditions);
+		JSONArray arrayConditions = jsonAll.getJSONArray("conditions");
+		String cypher = "";
+		List<String> wheres = new ArrayList<>();
+		for (int i = 0; i < arrayConditions.size(); i++){
+			String match1 = "", match2 = "", match3 = "";
+			JSONObject condition = arrayConditions.getJSONObject(i);
+			JSONObject ent1 = condition.getJSONObject("node1");
+			String id1 = ent1.getString("id");
+			match1 = "(n" + id1 + ":" + ent1.getString("label") + ")";
+			JSONObject properties1 = ent1.getJSONObject("properties"); 
+			for (String key: properties1.keySet()){
+				wheres.add("n" + id1 + "." + key + " = '" + properties1.getString(key) + "'");
+			}
+			
+			JSONObject ent2 = condition.getJSONObject("node2");
+			String id2 = ent2.getString("id");
+			match2 = "(n" + id2 + ":" + ent2.getString("label") + ")";
+			JSONObject properties2 = ent2.getJSONObject("properties"); 
+			for (String key: properties2.keySet()){
+				wheres.add("n" + id2 + "." + key + " = '" + properties2.getString(key) + "'");
+			}			
+			
+			JSONObject rel = condition.getJSONObject("relationships");
+			String id3 = rel.getString("id");
+			match3 = "[r" + id3 + ":" + rel.getString("type") + "]";
+			JSONObject properties3 = rel.getJSONObject("properties"); 
+			for (String key: properties3.keySet()){
+				wheres.add("r" + id3 + "." + key + " = '" + properties1.getString(key) + "'");
+			}
+			
+			cypher = cypher + "match " + match1 + "-" + match3 + "->" + match2 + " ";
+		}
+		String wString = "";
+		if (wheres.size() > 0){
+			wString = "where ";
+			for (int i = 0; i < wheres.size() - 1; i++){
+				wString = wString + wheres.get(i) + " and ";
+			}
+			wString = wString + wheres.get(wheres.size() - 1);
+		}
 		
+		JSONObject create = jsonAll.getJSONObject("create");
+		String idc1 = create.getJSONObject("node1").getString("id");
+		String idc2 = create.getJSONObject("node2").getString("id");
+		JSONObject relCreate = create.getJSONObject("relationships");
+		String typeC = relCreate.getString("type");
+		JSONObject proCreate = relCreate.getJSONObject("properties");
+		String set = "";
+		for (String key: proCreate.keySet()){
+			set = set + "r." + key + " = " + proCreate.getString(key) + ", ";
+		}
+		cypher = cypher + wString + " merge (n" + idc1 + ")-[r:" + typeC + "]->(n"+ idc2 + ")";
+		if (!"".equals(set)){
+			cypher = cypher + "set " + set.substring(0, set.length() - 2);
+		}
+		System.out.println(StartService.connection.exectCypher(cypher));
 	}
 	
+	/**
+	 * 
+	 * @param label 删除label以及与其相关联的边
+	 * @return 200为删除成功
+	 */
+	public static int deleteNodes(String label) {
+		StartService.set();
+		String cypher = "match (n:" + label + ")-[r]-() delete r,n";
+		return StartService.connection.exectCypher(cypher);
+	}
+	
+	/**
+	 * 
+	 * @param rel
+	 * @return 200为删除成功
+	 */
+	public static int deleteRels(String rel) {
+		StartService.set();
+		String cypher = "match ()-[r:" + rel + "]-() delete r,n";
+		return StartService.connection.exectCypher(cypher);
+	}
+
+	
+	/**
+	 * 
+	 * @param id 删除节点及与其相关联的边
+	 * @return 200为删除成功
+	 */
+	public static int deleteNode(String id) {
+		// TODO 自动生成的方法存根
+		StartService.set();
+		String cypher = "start n = node (" + id + ") match (n)-[r]-() delete r,n";
+		return StartService.connection.exectCypher(cypher);
+	}
 }
