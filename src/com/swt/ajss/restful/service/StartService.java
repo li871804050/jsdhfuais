@@ -32,8 +32,8 @@ public class StartService {
 	public static String dicDir = "dic";
 	public static String owlName = "20140427.owl";
 	public static void main(String[] args) {
-//		dicDir = args[0];
-//		owlName = args[1];
+		dicDir = args[0];
+		owlName = args[1];
 		System.err.println("添加label");
 //		addLable.startLabel();
 		System.err.println("添加label完成");

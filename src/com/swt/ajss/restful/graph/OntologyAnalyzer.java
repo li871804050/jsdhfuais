@@ -339,7 +339,8 @@ public class OntologyAnalyzer {
 			object.put("children", array1);
 			array.add(object);
 		}
-		return array.toJSONString();
+		
+		return "{" + array.toJSONString() + "}";
 	}
 	
 	

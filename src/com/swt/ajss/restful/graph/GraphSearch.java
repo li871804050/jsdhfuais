@@ -59,6 +59,7 @@ public class GraphSearch {
 //		String es = "[{\"ent1\":{\"field\":\"车次\",\"term\":\"D3068\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D3068\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20150222\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D3068\"},\"rel\":{\"count\":1}},{\"ent1\":{\"field\":\"车次\",\"term\":\"D5242\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D5242\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name9\"},\"ent2\":{\"field\":\"日期\",\"term\":\"20160704\"},\"rel\":{\"count\":4}},{\"ent1\":{\"field\":\"姓名\",\"term\":\"name10\"},\"ent2\":{\"field\":\"车次\",\"term\":\"D5242\"},\"rel\":{\"count\":4}}]";
 //		resData.clear();
 //		resData.add(ananlyzerESData.anaES(es));	
+//		resData.add(GraphData.showOntologyRelation());
 		
 		List<Map<String, String>> listMap = new ArrayList<>();
     	Map<String, String> m = new HashMap<>();
@@ -183,12 +184,9 @@ public class GraphSearch {
 			}else {
 				String result = "";
 				int lenEnt = ent.size() - 1;
-				for (int i = 0; i <= lenEnt; i++){
-					if (ent.get(i).matches(".*" + lenEnt)){
-						result = getNodesLineOne(ent, cyMatches, cyWhere);	//处理多个同类节点
-						break;
-					}
-				}
+					
+				result = getNodesLineOne(ent, cyMatches, cyWhere);	//处理多个同类节点
+				
 				if (!"".equals(result)){
 					data.add(result);
 				}else if (ent.size() == 2){
@@ -258,20 +256,16 @@ public class GraphSearch {
 		String cypher = "match ";
 		String ret = "return ";
 		String result = "";
-		String where = "";
 		StartService.set();
 		for (int i = 0; i < ent.size() - 1; i++){
 			int n = cyMatches.get(ent.get(i));
 			cypher = cypher + "(n" + n + ":" + ent.get(i) + ")-[r" + n + "]-(m),";
 			ret = ret + "n" + n + ",r" + n + ",";
-			where = where + "type(r" + n + ") = type($) and ";
 		}
 		int n = cyMatches.get(ent.get(ent.size() - 1));
-		where = where.replace("$", "r" + n);
-		where = where.substring(0, where.length() - 4);
 		cypher = cypher + "(n" + n + ":" + ent.get(ent.size() - 1) + ")-[r" + n + "]-(m) ";
 		ret = ret + "n" + n + ",r" + n + ", m";
-		cypher = cypher + cyWhere + " and " + where +  ret;
+		cypher = cypher + cyWhere +  ret;
 		for (int i = 1; i <= ent.size(); i++){
 			cypher = cypher.replace("_" + i, "");
 		}

@@ -122,11 +122,11 @@ public class searchData {
 	@Path("/reasoning")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void addRelation(String conditions){
+	public int addRelation(String conditions){
 	
 		System.out.println("推理!");
 
-		GraphData.reasoning(conditions);;
+		return GraphData.reasoning(conditions);
 	}
 	
 	
@@ -182,6 +182,16 @@ public class searchData {
 		casetype = paramJSON.getString("casetype");
 		casetype = casetype.replace("'", "");
 		return com.swt.ajss.restful.graph.GraphMap.analyzeMap(casetype);
+	}
+	
+	
+	@POST
+	@Path("/onto/rel")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String showOntoRel(){
+		System.out.println("本体关系！");
+		return GraphData.showOntologyRelation();
 	}
 	
 	@POST
@@ -395,6 +405,19 @@ public class searchData {
 		return "添加完成！";
 	}
 
+	@POST
+	@Path("/add/relnode")
+	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)	
+	public int addRelNode(String EntRel){
+		System.out.println("rel!");
+		
+		JSONObject object = JSONObject.parseObject(EntRel);
+		String id1 = object.getString("id1");
+		String rel = object.getString("rel");
+		String id2 = object.getString("id2");
+		return GraphData.addRelNode(id1, id2, rel);
+	}
 	
 	
 	@POST

@@ -9,12 +9,14 @@ import java.util.Set;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.swt.ajss.restful.resource.ananlyzerESData;
 import com.swt.ajss.restful.service.StartService;
 
 public class GraphData {
 	
 	public static void main(String[] args) {
-		getRel("69997");
+		OntologyAnalyzer ontologyAnalyzer = new OntologyAnalyzer("dic/20140427.owl");
+		System.out.println(showOntologyRelation());
 	}
 	
 	/*
@@ -189,7 +191,7 @@ public class GraphData {
 	 * @param conditions	每个关系一条记录，组成的数组
 	 * 
 	 */
-	public static void reasoning(String conditions) {
+	public static int reasoning(String conditions) {
 		StartService.set();
 		JSONObject jsonAll = JSONObject.parseObject(conditions);
 		JSONArray arrayConditions = jsonAll.getJSONArray("conditions");
@@ -247,7 +249,7 @@ public class GraphData {
 		if (!"".equals(set)){
 			cypher = cypher + "set " + set.substring(0, set.length() - 2);
 		}
-		System.out.println(StartService.connection.exectCypher(cypher));
+		return StartService.connection.exectCypher(cypher);
 	}
 	
 	/**
@@ -283,5 +285,40 @@ public class GraphData {
 		StartService.set();
 		String cypher = "start n = node (" + id + ") match (n)-[r]-() delete r,n";
 		return StartService.connection.exectCypher(cypher);
+	}
+	
+	/**
+	 * 
+	 * @param id 删除节点及与其相关联的边
+	 * @return 200为删除成功
+	 */
+	public static int addRelNode(String id1, String id2, String rel) {
+		// TODO 自动生成的方法存根
+		StartService.set();
+		String cypher = "start n = node (" + id1 + "), m = node (" + id2 + ") merge (n)-[:" + rel + "]->(m)";
+		return StartService.connection.exectCypher(cypher);
+	}
+	
+	
+	public static String showOntologyRelation() {
+		List<String> reList = OntologyAnalyzer.getRelation();
+		JSONArray array = new JSONArray();
+		for (String rel: reList){
+			JSONObject object = new JSONObject();
+			String[] datas = rel.split("-");
+			JSONObject object11 = new JSONObject();
+			object11.put("field", datas[0]);
+			object11.put("term", datas[0]);
+			object.put("ent2", object11);
+			JSONObject object12 = new JSONObject();
+			object12.put("field", datas[1]);
+			object12.put("term", datas[1]);
+			object.put("ent1", object12);
+			JSONObject object13 = new JSONObject();
+			object13.put("count", datas[2]);
+			object.put("rel", object13);
+			array.add(object);
+		}		
+		return ananlyzerESData.anaES(array.toJSONString());
 	}
 }
